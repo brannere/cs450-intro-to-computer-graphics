@@ -774,7 +774,7 @@ InitGraphics( )
 // (a display list is a way to store opengl commands in
 //  memory so that they can be played back efficiently at a later time
 //  with a call to glCallList( )
-
+int num_points = 1000;
 void
 InitLists( )
 {
@@ -786,52 +786,21 @@ InitLists( )
 	// create the object:
 
 	BoxList = glGenLists( 1 );
+	// float dang= 2.*M_PI/(float)(10-1);
+	float step = 0.1;
+	float z_step = 0;
 	glNewList( BoxList, GL_COMPILE );
 
-		glBegin( GL_QUADS );
+		glBegin( GL_LINE_LOOP );
 
-			glColor3f( 0., 0., 1. );
-			glNormal3f( 0., 0.,  1. );
-				glVertex3f( -dx, -dy,  dz );
-				glVertex3f(  dx, -dy,  dz );
-				glVertex3f(  dx,  dy,  dz );
-				glVertex3f( -dx,  dy,  dz );
-
-			glNormal3f( 0., 0., -1. );
-				glTexCoord2f( 0., 0. );
-				glVertex3f( -dx, -dy, -dz );
-				glTexCoord2f( 0., 1. );
-				glVertex3f( -dx,  dy, -dz );
-				glTexCoord2f( 1., 1. );
-				glVertex3f(  dx,  dy, -dz );
-				glTexCoord2f( 1., 0. );
-				glVertex3f(  dx, -dy, -dz );
-
-			glColor3f( 1., 0., 0. );
-			glNormal3f(  1., 0., 0. );
-				glVertex3f(  dx, -dy,  dz );
-				glVertex3f(  dx, -dy, -dz );
-				glVertex3f(  dx,  dy, -dz );
-				glVertex3f(  dx,  dy,  dz );
-
-			glNormal3f( -1., 0., 0. );
-				glVertex3f( -dx, -dy,  dz );
-				glVertex3f( -dx,  dy,  dz );
-				glVertex3f( -dx,  dy, -dz );
-				glVertex3f( -dx, -dy, -dz );
-
-			glColor3f( 0., 1., 0. );
-			glNormal3f( 0.,  1., 0. );
-				glVertex3f( -dx,  dy,  dz );
-				glVertex3f(  dx,  dy,  dz );
-				glVertex3f(  dx,  dy, -dz );
-				glVertex3f( -dx,  dy, -dz );
-
-			glNormal3f( 0., -1., 0. );
-				glVertex3f( -dx, -dy,  dz );
-				glVertex3f( -dx, -dy, -dz );
-				glVertex3f(  dx, -dy, -dz );
-				glVertex3f(  dx, -dy,  dz );
+			glColor3f( 0.25, 0.5, 1. );
+			glNormal3f( 0.25, 0.5,  1. );
+			for(int i = 0; i < num_points; i++){
+				glVertex3f(sin(step*2), sin(3*step),z_step);
+				step += 0.1;
+				z_step += 0.001;
+			}
+				
 
 		glEnd( );
 
