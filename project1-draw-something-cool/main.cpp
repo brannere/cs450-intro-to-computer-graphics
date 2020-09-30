@@ -789,21 +789,40 @@ InitLists( )
 	// float dang= 2.*M_PI/(float)(10-1);
 	float step = 0.1;
 	float z_step = 0;
+	int color_s = 0;
 	glNewList( BoxList, GL_COMPILE );
 
-		glBegin( GL_LINE_LOOP );
+		glBegin( GL_LINE_STRIP );
 
-			glColor3f( 0.25, 0.5, 1. );
-			glNormal3f( 0.25, 0.5,  1. );
+			// glNormal3f( 0.25, 0.5,  1. );
 			for(int i = 0; i < num_points; i++){
+				switch(color_s){
+					case 0:
+						glColor3f( 0, 1, 0 );
+						color_s +=1;
+						break;
+					case 1:
+						glColor3f( 1, 0, 0 );
+						color_s +=1;
+						break;
+					case 2:
+						glColor3f( 0, 0, 1 );
+						color_s +=1;
+						break;
+					case 3:
+						glColor3f( 0, 1, 1 );
+						color_s +=1;
+						break; 
+					case 4:
+						glColor3f( 1, 1, 0 );
+						color_s = 0;
+						break;
+				}
 				glVertex3f(sin(step*2), sin(3*step),z_step);
 				step += 0.1;
 				z_step += 0.001;
 			}
-				
-
 		glEnd( );
-
 	glEndList( );
 
 
