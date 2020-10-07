@@ -853,7 +853,10 @@ Keyboard( unsigned char c, int x, int y )
 
 		case 't':
 		case 'T':
-			fprintf(stdout, "Caught case t\n");
+			if(first_p){
+				first_p = false;
+			} else first_p = true; 
+			fprintf(stdout, "first_p is: %d\n", first_p);
 			break;
 
 		default:
