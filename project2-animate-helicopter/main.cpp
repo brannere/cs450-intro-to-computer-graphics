@@ -357,9 +357,16 @@ Display( )
 
 
 	// set the eye position, look-at position, and up-vector:
-
-	// gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
-	gluLookAt( -0.4,1.8,-4.9,     1., 1., 1.,     0., 1., 0. );
+	
+	// third person
+	if(first_p == false) {
+		gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	}
+	
+	// first person
+	if(first_p == true){
+		gluLookAt( -0.4,1.8,-4.9,     1., 1., 1.,     0., 1., 0. );
+	}
 
 
 	// rotate the scene:
