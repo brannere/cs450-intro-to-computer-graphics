@@ -17,6 +17,7 @@
 
 #include "./heli.550"
 
+bool first_p = false; 
 //	This is a sample OpenGL / GLUT program
 //
 //	The objective is to draw a 3d object and change the color of the axes
@@ -357,7 +358,8 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	// gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	gluLookAt( -0.4,1.8,-4.9,     1., 1., 1.,     0., 1., 0. );
 
 
 	// rotate the scene:
@@ -368,9 +370,11 @@ Display( )
 
 	// uniformly scale the scene:
 
-	if( Scale < MINSCALE )
-		Scale = MINSCALE;
-	glScalef( (GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale );
+	if(first_p == false){
+		if( Scale < MINSCALE )
+			Scale = MINSCALE;
+		glScalef( (GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale );
+	}
 
 
 	// set the fog parameters:
@@ -846,6 +850,11 @@ Keyboard( unsigned char c, int x, int y )
 		case ESCAPE:
 			DoMainMenu( QUIT );	// will not return here
 			break;				// happy compiler
+
+		case 't':
+		case 'T':
+			fprintf(stdout, "Caught case t\n");
+			break;
 
 		default:
 			fprintf( stderr, "Don't know what to do with keyboard hit: '%c' (0x%0x)\n", c, c );
