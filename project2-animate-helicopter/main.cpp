@@ -782,6 +782,10 @@ InitGraphics( )
 }
 
 
+/*******************************************************8*/
+/* Erick's code */
+const float BLADE_LEN = 10;
+const float BLADE_WIDTH = 1;
 // initialize the display lists that will not change:
 // (a display list is a way to store opengl commands in
 //  memory so that they can be played back efficiently at a later time
@@ -800,13 +804,25 @@ InitLists( )
 	BoxList = glGenLists( 1 );
 	// float dang= 2.*M_PI/(float)(10-1);
 	glNewList( BoxList, GL_COMPILE );
-	int i;
-	struct edge *ep;
-	struct point *p0, *p1;
 	glPushMatrix();
 		glTranslatef(0,0,-15);
 		glutWireTeapot(2);
 	glPopMatrix();
+	
+	glPushMatrix();
+		glBegin(GL_TRIANGLES);
+		glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
+		glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
+		glVertex3f(0,0,0);
+		glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
+		glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
+		glVertex3f(0,0,0);
+		glEnd();
+	glPopMatrix();
+	
+	int i;
+	struct edge *ep;
+	struct point *p0, *p1;
 	glPushMatrix( );
 	glTranslatef( 0., -1., 0. );
 	glRotatef( 97., 0., 1., 0. );
