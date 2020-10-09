@@ -195,6 +195,10 @@ int		WhichProjection;		// ORTHO or PERSP
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 
+/* Erick's non constant global variables */
+GLuint	BladesList;
+
+
 
 // function prototypes:
 
@@ -418,6 +422,7 @@ Display( )
 	// draw the current object:
 
 	glCallList( BoxList );
+	glCallList( BladesList );
 
 #ifdef DEMO_Z_FIGHTING
 	if( DepthFightingOn != 0 )
@@ -782,10 +787,11 @@ InitGraphics( )
 }
 
 
-/*******************************************************8*/
+/********************************************************/
 /* Erick's code */
 const float BLADE_LEN = 10;
 const float BLADE_WIDTH = 1;
+
 // initialize the display lists that will not change:
 // (a display list is a way to store opengl commands in
 //  memory so that they can be played back efficiently at a later time
@@ -806,19 +812,22 @@ InitLists( )
 	glNewList( BoxList, GL_COMPILE );
 	glPushMatrix();
 		glTranslatef(0,0,-15);
+		glRotatef(37, 0, 0, 1);
 		glutWireTeapot(2);
 	glPopMatrix();
 	
-	glPushMatrix();
-		glBegin(GL_TRIANGLES);
-		glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
-		glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
-		glVertex3f(0,0,0);
-		glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
-		glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
-		glVertex3f(0,0,0);
-		glEnd();
-	glPopMatrix();
+	// glPushMatrix();
+	// 	glBegin(GL_TRIANGLES);
+	// 	glTranslatef(0.,2.9,-2.);
+	// 	glRotatef(12, 0, 0, 1);
+	// 	glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
+	// 	glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
+	// 	glVertex3f(0,0,0);
+	// 	glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
+	// 	glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
+	// 	glVertex3f(0,0,0);
+	// 	glEnd();
+	// glPopMatrix();
 	
 	int i;
 	struct edge *ep;
@@ -838,6 +847,23 @@ InitLists( )
 	glPopMatrix( );
 
 	glEndList( );
+
+	// create blades list
+	BladesList = glGenLists(1);
+	glNewList(BladesList, GL_COMPILE);
+	glPushMatrix();
+		glBegin(GL_TRIANGLES);
+		glTranslatef(0.,2.9,-2.);
+		glRotatef(12, 0, 0, 1);
+		glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
+		glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
+		glVertex3f(0,0,0);
+		glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
+		glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
+		glVertex3f(0,0,0);
+		glEnd();
+	glPopMatrix();
+	glEndList();
 
 
 	// create the axes:
