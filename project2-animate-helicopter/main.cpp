@@ -434,7 +434,7 @@ Display( )
 
 	glDisable( GL_DEPTH_TEST );
 	glColor3f( 0., 1., 1. );
-	DoRasterString( 0., 1., 0., (char *)"Text That Moves" );
+	// DoRasterString( 0., 1., 0., (char *)"Text That Moves" );
 
 
 	// draw some gratuitous text that is fixed on the screen:
@@ -454,7 +454,7 @@ Display( )
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity( );
 	glColor3f( 1., 1., 1. );
-	DoRasterString( 5., 5., 0., (char *)"Text That Doesn't" );
+	// DoRasterString( 5., 5., 0., (char *)"Text That Doesn't" );
 
 
 	// swap the double-buffered framebuffers:
@@ -803,13 +803,16 @@ InitLists( )
 	int i;
 	struct edge *ep;
 	struct point *p0, *p1;
+	glPushMatrix();
+		glTranslatef(0,0,-15);
+		glutWireTeapot(2);
+	glPopMatrix();
 	glPushMatrix( );
 	glTranslatef( 0., -1., 0. );
 	glRotatef( 97., 0., 1., 0. );
 	glRotatef( -15., 0., 0., 1. );
 	glBegin( GL_LINES );
-	for( i=0, ep = Heliedges; i < Helinedges; i++, ep++ )
-	{
+	for( i=0, ep = Heliedges; i < Helinedges; i++, ep++ ){
 	p0 = &Helipoints[ ep->p0 ];
 	p1 = &Helipoints[ ep->p1 ];
 	glVertex3f( p0->x, p0->y, p0->z );
