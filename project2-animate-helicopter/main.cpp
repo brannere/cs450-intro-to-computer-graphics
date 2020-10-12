@@ -872,7 +872,7 @@ InitLists( )
 //	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
 glPushMatrix();
 glTranslatef(0.,2.9,-2.);
-// glRotatef(12, 0, 0, 1);
+glRotatef(90, 1, 0, 0);
 glBegin( GL_TRIANGLES );
 	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
 	glVertex2f(  0., 0. );
