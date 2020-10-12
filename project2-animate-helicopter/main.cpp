@@ -17,7 +17,13 @@
 
 #include "./heli.550"
 
-bool first_p = false; 
+/* Erick's globals */
+bool first_p = false;
+float BladeAngle = 0; 
+#define MS_IN_THE_ANIMATION_CYCLE 1000
+
+/******************/
+
 //	This is a sample OpenGL / GLUT program
 //
 //	The objective is to draw a 3d object and change the color of the axes
@@ -285,6 +291,8 @@ main( int argc, char *argv[ ] )
 //
 // do not call Display( ) from here -- let glutMainLoop( ) do it
 
+float Time;
+
 void
 Animate( )
 {
@@ -292,6 +300,10 @@ Animate( )
 	// for Display( ) to find:
 
 	// force a call to Display( ) next time it is convenient:
+	int ms = glutGet (GLUT_ELAPSED_TIME); //ms
+	ms &= MS_IN_THE_ANIMATION_CYCLE;
+	Time = float(ms) / (float)MS_IN_THE_ANIMATION_CYCLE; // [0., 1.)
+
 
 	glutSetWindow( MainWindow );
 	glutPostRedisplay( );
@@ -714,7 +726,7 @@ InitGraphics( )
 	// ask for red-green-blue-alpha color, double-buffering, and z-buffering:
 
 	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH );
-
+	
 	// set the initial window configuration:
 
 	glutInitWindowPosition( 0, 0 );
@@ -769,7 +781,8 @@ InitGraphics( )
 	glutTabletButtonFunc( NULL );
 	glutMenuStateFunc( NULL );
 	glutTimerFunc( -1, NULL, 0 );
-	glutIdleFunc( NULL );
+	glutIdleFunc( Animate );
+	Animate();
 
 	// init glew (a window must be open to do this):
 
@@ -797,6 +810,7 @@ const float BLADE_WIDTH = 1;
 //  memory so that they can be played back efficiently at a later time
 //  with a call to glCallList( )
 int num_points = 1000;
+
 void
 InitLists( )
 {
