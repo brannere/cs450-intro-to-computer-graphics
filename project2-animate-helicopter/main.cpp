@@ -20,6 +20,7 @@
 /* Erick's globals */
 bool first_p = false;
 float BladeAngle = 0; 
+bool Frozen;
 #define MS_IN_THE_ANIMATION_CYCLE 1000
 
 /******************/
@@ -298,12 +299,15 @@ Animate( )
 {
 	// put animation stuff in here -- change some global variables
 	// for Display( ) to find:
-
+	BladeAngle+=1;
+	// fprintf(stdout, "BladeAngle: %f\n", BladeAngle);
+	// BladeAngle++;
+	// fprintf(stdout, "Called\n");
 	// force a call to Display( ) next time it is convenient:
 	int ms = glutGet (GLUT_ELAPSED_TIME); //ms
-	ms &= MS_IN_THE_ANIMATION_CYCLE;
+	ms %= MS_IN_THE_ANIMATION_CYCLE;
 	Time = float(ms) / (float)MS_IN_THE_ANIMATION_CYCLE; // [0., 1.)
-
+	// Display();
 
 	glutSetWindow( MainWindow );
 	glutPostRedisplay( );
@@ -315,6 +319,8 @@ Animate( )
 void
 Display( )
 {
+	// fprintf(stdout, "REDRAWING SCENE with BladeAngle:\t%f\n", BladeAngle);
+
 	if( DebugOn != 0 )
 	{
 		fprintf( stderr, "Display\n" );
@@ -782,7 +788,7 @@ InitGraphics( )
 	glutMenuStateFunc( NULL );
 	glutTimerFunc( -1, NULL, 0 );
 	glutIdleFunc( Animate );
-	Animate();
+	// Animate();
 
 	// init glew (a window must be open to do this):
 
@@ -871,12 +877,18 @@ InitLists( )
 
 // draw the helicopter blade with radius BLADE_RADIUS and
 //	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
+// glNewList( BladesList, GL_COMPILE );
+
+
+BladesList = glGenLists( 1 );
+glNewList( BladesList, GL_COMPILE );
 
 glColor3f(1,1,1);
 /* Front blade */
 glPushMatrix();
 glTranslatef(0.,2.9,-2.);
 glRotatef(90, 1, 0, 0);
+glRotatef(BladeAngle, 0, 0, 1);
 glScalef(5, 2.5, 2.5);
 glBegin( GL_TRIANGLES );
 	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
@@ -905,6 +917,7 @@ glBegin( GL_TRIANGLES );
 	glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
 glEnd( );
 glPopMatrix();
+glEndList( );
 
 	// create the axes:
 
@@ -914,6 +927,8 @@ glPopMatrix();
 			Axes( 1.5 );
 		glLineWidth( 1. );
 	glEndList( );
+	// Animate();
+	// glutIdleFunc(Animate);
 }
 
 
@@ -949,6 +964,15 @@ Keyboard( unsigned char c, int x, int y )
 				first_p = false;
 			} else first_p = true; 
 			fprintf(stdout, "first_p is: %d\n", first_p);
+			break;
+
+		case 'f':
+		case 'F':
+			Frozen = ! Frozen;
+			if( Frozen )
+				glutIdleFunc( NULL );
+			else
+				glutIdleFunc( Animate );
 			break;
 
 		default:
