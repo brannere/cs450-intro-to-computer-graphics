@@ -443,7 +443,7 @@ Display( )
 
 
 	// draw the current object:
-	fprintf(stdout, "REDRAWING SCENE with BladeAngle:\t%f\n", BladeAngle);
+	// fprintf(stdout, "REDRAWING SCENE with BladeAngle:\t%f\n", BladeAngle);
 
 	// glCallList( BladesList );
 		glColor3f(1,1,1);
@@ -467,8 +467,8 @@ Display( )
 	/* Back blade */
 	glPushMatrix();
 		glTranslatef(0.5,2.5,9.);
-		glRotatef(90, 0, 1, 1);
-		glRotatef(BladeAngle, 0, 1, 0);
+		glRotatef(90, 0, 1, 0);
+		glRotatef(BladeAngle, 0, 0, 1);
 		glScalef(1.5, 1.5/2, 1.5/2);
 		glBegin( GL_TRIANGLES );
 			glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
