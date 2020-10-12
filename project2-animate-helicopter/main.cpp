@@ -802,8 +802,11 @@ InitGraphics( )
 
 /********************************************************/
 /* Erick's code */
-const float BLADE_LEN = 10;
-const float BLADE_WIDTH = 1;
+// const float BLADE_LEN = 10;
+// const float BLADE_WIDTH = 1;
+#define BLADE_RADIUS		 1.0
+#define BLADE_WIDTH		 0.4
+
 
 // initialize the display lists that will not change:
 // (a display list is a way to store opengl commands in
@@ -852,33 +855,34 @@ InitLists( )
 	glRotatef( -15., 0., 0., 1. );
 	glBegin( GL_LINES );
 	for( i=0, ep = Heliedges; i < Helinedges; i++, ep++ ){
-	p0 = &Helipoints[ ep->p0 ];
-	p1 = &Helipoints[ ep->p1 ];
-	glVertex3f( p0->x, p0->y, p0->z );
-	glVertex3f( p1->x, p1->y, p1->z );
+		p0 = &Helipoints[ ep->p0 ];
+		p1 = &Helipoints[ ep->p1 ];
+		glVertex3f( p0->x, p0->y, p0->z );
+		glVertex3f( p1->x, p1->y, p1->z );
 	}
 	glEnd( );
 	glPopMatrix( );
 
-	glEndList( );
+	// glEndList( );
 
 	// create blades list
-	// BladesList = glGenLists(1);
-	// glNewList(BladesList, GL_COMPILE);
-	// glPushMatrix();
-	// 	glBegin(GL_TRIANGLES);
-	// 	glTranslatef(0.,2.9,-2.);
-	// 	glRotatef(12, 0, 0, 1);
-	// 	glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
-	// 	glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
-	// 	glVertex3f(0,0,0);
-	// 	glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
-	// 	glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
-	// 	glVertex3f(0,0,0);
-	// 	glEnd();
-	// glPopMatrix();
-	// glEndList();
 
+
+// draw the helicopter blade with radius BLADE_RADIUS and
+//	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
+glPushMatrix();
+// glTranslatef(0.,15.,0.);
+// glRotatef(12, 0, 0, 1);
+glBegin( GL_TRIANGLES );
+	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
+	glVertex2f(  0., 0. );
+	glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
+
+	glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
+	glVertex2f(  0., 0. );
+	glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
+glEnd( );
+glPopMatrix();
 
 	// create the axes:
 
