@@ -18,10 +18,13 @@
 #include "./heli.550"
 
 /* Erick's globals */
+#define MS_IN_THE_ANIMATION_CYCLE 1000
+#define BLADE_RADIUS		 1.0
+#define BLADE_WIDTH		 0.4
 bool first_p = false;
 float BladeAngle = 0; 
 bool Frozen;
-#define MS_IN_THE_ANIMATION_CYCLE 1000
+
 
 /******************/
 
@@ -299,7 +302,7 @@ Animate( )
 {
 	// put animation stuff in here -- change some global variables
 	// for Display( ) to find:
-	BladeAngle+=1;
+	BladeAngle = 360*Time;
 	// fprintf(stdout, "BladeAngle: %f\n", BladeAngle);
 	// BladeAngle++;
 	// fprintf(stdout, "Called\n");
@@ -320,6 +323,8 @@ void
 Display( )
 {
 	// fprintf(stdout, "REDRAWING SCENE with BladeAngle:\t%f\n", BladeAngle);
+	// glCallList( BoxList );
+	// glCallList( BladesList );
 
 	if( DebugOn != 0 )
 	{
@@ -438,9 +443,46 @@ Display( )
 
 
 	// draw the current object:
+	fprintf(stdout, "REDRAWING SCENE with BladeAngle:\t%f\n", BladeAngle);
+
+	// glCallList( BladesList );
+		glColor3f(1,1,1);
+	/* Front blade */
+	glPushMatrix();
+		glTranslatef(0.,2.9,-2.);
+		glRotatef(90, 1, 0, 0);
+		glRotatef(BladeAngle, 0, 0, 1);
+		glScalef(5, 2.5, 2.5);
+		glBegin( GL_TRIANGLES );
+			glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
+			glVertex2f(  0., 0. );
+			glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
+
+			glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
+			glVertex2f(  0., 0. );
+			glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
+		glEnd( );
+	glPopMatrix();
+
+	/* Back blade */
+	glPushMatrix();
+		glTranslatef(0.5,2.5,9.);
+		glRotatef(90, 0, 1, 1);
+		glRotatef(BladeAngle, 0, 1, 0);
+		glScalef(1.5, 1.5/2, 1.5/2);
+		glBegin( GL_TRIANGLES );
+			glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
+			glVertex2f(  0., 0. );
+			glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
+
+			glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
+			glVertex2f(  0., 0. );
+			glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
+		glEnd( );
+	glPopMatrix();
+// glEndList( );
 
 	glCallList( BoxList );
-	glCallList( BladesList );
 
 #ifdef DEMO_Z_FIGHTING
 	if( DepthFightingOn != 0 )
@@ -810,8 +852,8 @@ InitGraphics( )
 /* Erick's code */
 // const float BLADE_LEN = 10;
 // const float BLADE_WIDTH = 1;
-#define BLADE_RADIUS		 1.0
-#define BLADE_WIDTH		 0.4
+// #define BLADE_RADIUS		 1.0
+// #define BLADE_WIDTH		 0.4
 
 
 // initialize the display lists that will not change:
@@ -823,6 +865,7 @@ int num_points = 1000;
 void
 InitLists( )
 {
+	fprintf(stdout, "InitLists() called\n");
 	float dx = BOXSIZE / 2.f;
 	float dy = BOXSIZE / 2.f;
 	float dz = BOXSIZE / 2.f;
@@ -869,6 +912,8 @@ InitLists( )
 	}
 	glEnd( );
 	glPopMatrix( );
+	glEndList( );
+
 
 	// glEndList( );
 
@@ -880,44 +925,44 @@ InitLists( )
 // glNewList( BladesList, GL_COMPILE );
 
 
-BladesList = glGenLists( 1 );
-glNewList( BladesList, GL_COMPILE );
+// BladesList = glGenLists( 1 );
+// glNewList( BladesList, GL_COMPILE );
 
-glColor3f(1,1,1);
-/* Front blade */
-glPushMatrix();
-glTranslatef(0.,2.9,-2.);
-glRotatef(90, 1, 0, 0);
-glRotatef(BladeAngle, 0, 0, 1);
-glScalef(5, 2.5, 2.5);
-glBegin( GL_TRIANGLES );
-	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
-	glVertex2f(  0., 0. );
-	glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
+// 	glColor3f(1,1,1);
+// 	/* Front blade */
+// 	glPushMatrix();
+// 		glTranslatef(0.,2.9,-2.);
+// 		glRotatef(90, 1, 0, 0);
+// 		glRotatef(BladeAngle, 0, 0, 1);
+// 		glScalef(5, 2.5, 2.5);
+// 		glBegin( GL_TRIANGLES );
+// 			glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
+// 			glVertex2f(  0., 0. );
+// 			glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
 
-	glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
-	glVertex2f(  0., 0. );
-	glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
-glEnd( );
-glPopMatrix();
+// 			glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
+// 			glVertex2f(  0., 0. );
+// 			glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
+// 		glEnd( );
+// 	glPopMatrix();
 
-/* Back blade */
-glPushMatrix();
-glTranslatef(0.5,2.5,9.);
-glRotatef(90, 0, 1, 1);
-// glRotatef(90, 0, 1, 0);
-glScalef(1.5, 1.5/2, 1.5/2);
-glBegin( GL_TRIANGLES );
-	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
-	glVertex2f(  0., 0. );
-	glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
+// 	/* Back blade */
+// 	glPushMatrix();
+// 		glTranslatef(0.5,2.5,9.);
+// 		glRotatef(90, 0, 1, 1);
+// 		// glRotatef(90, 0, 1, 0);
+// 		glScalef(1.5, 1.5/2, 1.5/2);
+// 		glBegin( GL_TRIANGLES );
+// 			glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
+// 			glVertex2f(  0., 0. );
+// 			glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
 
-	glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
-	glVertex2f(  0., 0. );
-	glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
-glEnd( );
-glPopMatrix();
-glEndList( );
+// 			glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
+// 			glVertex2f(  0., 0. );
+// 			glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
+// 		glEnd( );
+// 	glPopMatrix();
+// // glEndList( );
 
 	// create the axes:
 
@@ -927,8 +972,6 @@ glEndList( );
 			Axes( 1.5 );
 		glLineWidth( 1. );
 	glEndList( );
-	// Animate();
-	// glutIdleFunc(Animate);
 }
 
 
