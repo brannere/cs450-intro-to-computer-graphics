@@ -871,7 +871,7 @@ InitLists( )
 // draw the helicopter blade with radius BLADE_RADIUS and
 //	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
 glPushMatrix();
-// glTranslatef(0.,15.,0.);
+glTranslatef(0.,2.9,-2.);
 // glRotatef(12, 0, 0, 1);
 glBegin( GL_TRIANGLES );
 	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
