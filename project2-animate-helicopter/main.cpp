@@ -857,6 +857,7 @@ InitLists( )
 	for( i=0, ep = Heliedges; i < Helinedges; i++, ep++ ){
 		p0 = &Helipoints[ ep->p0 ];
 		p1 = &Helipoints[ ep->p1 ];
+		glColor3f(0,1,0);
 		glVertex3f( p0->x, p0->y, p0->z );
 		glVertex3f( p1->x, p1->y, p1->z );
 	}
@@ -870,10 +871,30 @@ InitLists( )
 
 // draw the helicopter blade with radius BLADE_RADIUS and
 //	width BLADE_WIDTH centered at (0.,0.,0.) in the XY plane
+
+glColor3f(1,1,1);
+/* Front blade */
 glPushMatrix();
 glTranslatef(0.,2.9,-2.);
 glRotatef(90, 1, 0, 0);
 glScalef(5, 2.5, 2.5);
+glBegin( GL_TRIANGLES );
+	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
+	glVertex2f(  0., 0. );
+	glVertex2f(  BLADE_RADIUS, -BLADE_WIDTH/2. );
+
+	glVertex2f( -BLADE_RADIUS, -BLADE_WIDTH/2. );
+	glVertex2f(  0., 0. );
+	glVertex2f( -BLADE_RADIUS,  BLADE_WIDTH/2. );
+glEnd( );
+glPopMatrix();
+
+/* Back blade */
+glPushMatrix();
+glTranslatef(0.5,2.5,9.);
+glRotatef(90, 0, 1, 1);
+// glRotatef(90, 0, 1, 0);
+glScalef(1.5, 1.5/2, 1.5/2);
 glBegin( GL_TRIANGLES );
 	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
 	glVertex2f(  0., 0. );
