@@ -381,7 +381,7 @@ Display( )
 	
 	// first person
 	if(first_p == true){
-		gluLookAt( -0.4,1.8,-4.9,     1., 1., 1.,     0., 1., 0. );
+		gluLookAt( -0.4,1.8,-4.9,     0., 0., 0.,     0., 1., 0. );
 	}
 
 
