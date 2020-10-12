@@ -381,14 +381,12 @@ Display( )
 	
 	// first person
 	if(first_p == true){
-		gluLookAt( -0.4,1.8,-4.9,     0., 0., 0.,     0., 1., 0. );
+		gluLookAt( -0.4,1.8,-4.9,     0., 0., -15.,     0., 1., 0. );
 	}
 
 
 	// rotate the scene:
 
-	glRotatef( (GLfloat)Yrot, 0., 1., 0. );
-	glRotatef( (GLfloat)Xrot, 1., 0., 0. );
 
 
 	// uniformly scale the scene:
@@ -396,7 +394,9 @@ Display( )
 	if(first_p == false){
 		if( Scale < MINSCALE )
 			Scale = MINSCALE;
-		glScalef( (GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale );
+			glRotatef( (GLfloat)Yrot, 0., 1., 0. );
+			glRotatef( (GLfloat)Xrot, 1., 0., 0. );
+			glScalef( (GLfloat)Scale, (GLfloat)Scale, (GLfloat)Scale );
 	}
 
 
