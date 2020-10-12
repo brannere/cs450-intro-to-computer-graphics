@@ -873,6 +873,7 @@ InitLists( )
 glPushMatrix();
 glTranslatef(0.,2.9,-2.);
 glRotatef(90, 1, 0, 0);
+glScalef(5, 2.5, 2.5);
 glBegin( GL_TRIANGLES );
 	glVertex2f(  BLADE_RADIUS,  BLADE_WIDTH/2. );
 	glVertex2f(  0., 0. );
