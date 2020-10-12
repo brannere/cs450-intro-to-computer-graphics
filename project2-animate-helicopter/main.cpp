@@ -364,7 +364,7 @@ Display( )
 	
 	// third person
 	if(first_p == false) {
-		gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+		gluLookAt( 0., 7., 5.,     0., 2., 0.,     0., 1., 0. );
 	}
 	
 	// first person
@@ -849,21 +849,21 @@ InitLists( )
 	glEndList( );
 
 	// create blades list
-	BladesList = glGenLists(1);
-	glNewList(BladesList, GL_COMPILE);
-	glPushMatrix();
-		glBegin(GL_TRIANGLES);
-		glTranslatef(0.,2.9,-2.);
-		glRotatef(12, 0, 0, 1);
-		glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
-		glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
-		glVertex3f(0,0,0);
-		glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
-		glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
-		glVertex3f(0,0,0);
-		glEnd();
-	glPopMatrix();
-	glEndList();
+	// BladesList = glGenLists(1);
+	// glNewList(BladesList, GL_COMPILE);
+	// glPushMatrix();
+	// 	glBegin(GL_TRIANGLES);
+	// 	glTranslatef(0.,2.9,-2.);
+	// 	glRotatef(12, 0, 0, 1);
+	// 	glVertex3f(-BLADE_LEN,-BLADE_WIDTH,0);
+	// 	glVertex3f(-BLADE_LEN,BLADE_WIDTH,0);
+	// 	glVertex3f(0,0,0);
+	// 	glVertex3f(BLADE_LEN,-BLADE_WIDTH,0);
+	// 	glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
+	// 	glVertex3f(0,0,0);
+	// 	glEnd();
+	// glPopMatrix();
+	// glEndList();
 
 
 	// create the axes:
