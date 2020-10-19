@@ -562,6 +562,7 @@ Display( )
 	// glBegin( GL_QUADS );
 	MjbSphere(1,100,100);
 	glEnd( );
+	glDisable( GL_TEXTURE_2D );
 	if( DepthFightingOn != 0 )
 	{
 		glPushMatrix( );
