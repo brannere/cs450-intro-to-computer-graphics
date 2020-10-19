@@ -560,7 +560,7 @@ Display( )
 		glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, Tex0 );
 	// glBegin( GL_QUADS );
-	MjbSphere(5,5,5);
+	MjbSphere(1,100,100);
 	glEnd( );
 	if( DepthFightingOn != 0 )
 	{
