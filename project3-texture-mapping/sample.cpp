@@ -273,7 +273,7 @@ MjbSphere( float radius, int slices, int stacks )
 
 
 	// fill the Pts structure:
-
+	bool flip = true;
 	for( int ilat = 0; ilat < NumLats; ilat++ )
 	{
 		float lat = -M_PI/2.  +  M_PI * (float)ilat / (float)(NumLats-1);
@@ -293,10 +293,17 @@ MjbSphere( float radius, int slices, int stacks )
 			p->nz = z;
 			if( Distort )
 			{
-				p->s = (( lng + M_PI    ) / ( 2.*M_PI ))*cos(lat)+Time;
-				p->t = (( lat + M_PI/2. ) / M_PI);
+				p->s = (( lng + M_PI    ) / ( 2.*M_PI ))*tan(lat*Time);
+
+				// if(flip){
+				// 	p->t = (( lat + M_PI/2. ) / M_PI)+(rand()%2)*0.001;
+				// 	flip = false;
+				// } else{ 
+					p->t = (( lat + M_PI/2. ) / M_PI)-tan(lng*Time)*0.001;
+				// 	flip = true; 
+				// }
 				// fprintf(stdout, "s: %f\tt: %f\n", p->s, p->t);
-				fprintf(stdout, "time: %f\n", Time);
+				// fprintf(stdout, "time: %f\n", Time);
 			}
 			else
 			{
