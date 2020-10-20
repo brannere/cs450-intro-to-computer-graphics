@@ -15,8 +15,8 @@
 #include <GL/glu.h>
 #include "glut.h"
 #include "bmptotexture.cpp"
-const int MS_PER_CYCLE = 1; 
-
+const int MS_PER_CYCLE = 1000; 
+float Time;
 GLuint Tex0, Tex1;
 
 
@@ -293,9 +293,10 @@ MjbSphere( float radius, int slices, int stacks )
 			p->nz = z;
 			if( Distort )
 			{
-				p->s = lng*rand();
-				p->t = lat*rand();
-				fprintf(stdout, "s: %f\tt: %f\n", p->s, p->t);
+				p->s = (( lng + M_PI    ) / ( 2.*M_PI ))*cos(lat)+Time;
+				p->t = (( lat + M_PI/2. ) / M_PI);
+				// fprintf(stdout, "s: %f\tt: %f\n", p->s, p->t);
+				fprintf(stdout, "time: %f\n", Time);
 			}
 			else
 			{
@@ -443,7 +444,7 @@ Animate( )
 	// force a call to Display( ) next time it is convenient:
 	int ms = glutGet( GLUT_ELAPSED_TIME );
 	ms %= MS_PER_CYCLE;
-	// Time = (float)ms / (float)MS_PER_CYCLE;
+	Time = (float)ms / (float)MS_PER_CYCLE;
 	// fprintf(stdout, "Animate\n");		
 
 	glutSetWindow( MainWindow );
