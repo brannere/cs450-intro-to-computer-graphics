@@ -15,6 +15,7 @@
 #include <GL/glu.h>
 #include "glut.h"
 #include "bmptotexture.cpp"
+const int MS_PER_CYCLE = 1; 
 
 GLuint Tex0, Tex1;
 
@@ -253,7 +254,7 @@ MjbSphere( float radius, int slices, int stacks )
 {
 	struct point top, bot;		// top, bottom points
 	struct point *p;
-
+	// fprintf(stdout, "sphere\n");
 	// set the globals:
 
 	NumLngs = slices;
@@ -292,8 +293,9 @@ MjbSphere( float radius, int slices, int stacks )
 			p->nz = z;
 			if( Distort )
 			{
-				p->s = 0;
-				p->t = 0;
+				p->s = lng*rand();
+				p->t = lat*rand();
+				fprintf(stdout, "s: %f\tt: %f\n", p->s, p->t);
 			}
 			else
 			{
@@ -379,10 +381,11 @@ MjbSphere( float radius, int slices, int stacks )
 
 
 // main program:
-
+#include <time.h>
 int
 main( int argc, char *argv[ ] )
 {
+	srand(time(NULL));
 	// turn on the glut package:
 	// (do this before checking argc and argv since it might
 	// pull some command line arguments out)
@@ -438,6 +441,10 @@ Animate( )
 	// for Display( ) to find:
 
 	// force a call to Display( ) next time it is convenient:
+	int ms = glutGet( GLUT_ELAPSED_TIME );
+	ms %= MS_PER_CYCLE;
+	// Time = (float)ms / (float)MS_PER_CYCLE;
+	// fprintf(stdout, "Animate\n");		
 
 	glutSetWindow( MainWindow );
 	glutPostRedisplay( );
@@ -884,7 +891,7 @@ InitGraphics( )
 	glutTabletButtonFunc( NULL );
 	glutMenuStateFunc( NULL );
 	glutTimerFunc( -1, NULL, 0 );
-	glutIdleFunc( NULL );
+	glutIdleFunc( Animate );
 
 	// init glew (a window must be open to do this):
 
@@ -1003,6 +1010,12 @@ Keyboard( unsigned char c, int x, int y )
 
 	switch( c )
 	{
+		case 'd':
+		case 'D':
+			if(Distort){
+				Distort = false;
+			} else Distort = true;
+			break;
 		case 'o':
 		case 'O':
 			WhichProjection = ORTHO;
