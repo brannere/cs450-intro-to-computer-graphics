@@ -18,6 +18,7 @@
 const int MS_PER_CYCLE = 1000; 
 float Time;
 GLuint Tex0, Tex1;
+bool texture;
 
 
 //	This is a sample OpenGL / GLUT program
@@ -572,8 +573,12 @@ Display( )
 	// draw the current object:
 
 	glCallList( BoxList );
+	if(texture){
 		glEnable(GL_TEXTURE_2D);
-	glBindTexture( GL_TEXTURE_2D, Tex0 );
+		glBindTexture( GL_TEXTURE_2D, Tex0 );
+	}else{
+			glColor3f( 0., 1., 0. );
+	}
 	// glBegin( GL_QUADS );
 	MjbSphere(1,100,100);
 	glEnd( );
@@ -589,9 +594,9 @@ Display( )
 
 	// draw some gratuitous text that just rotates on top of the scene:
 
-	glDisable( GL_DEPTH_TEST );
-	glColor3f( 0., 1., 1. );
-	DoRasterString( 0., 1., 0., (char *)"Text That Moves" );
+	// glDisable( GL_DEPTH_TEST );
+	// glColor3f( 0., 1., 1. );
+	// DoRasterString( 0., 1., 0., (char *)"Text That Moves" );
 
 
 	// draw some gratuitous text that is fixed on the screen:
@@ -610,8 +615,8 @@ Display( )
 	gluOrtho2D( 0., 100.,     0., 100. );
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity( );
-	glColor3f( 1., 1., 1. );
-	DoRasterString( 5., 5., 0., (char *)"Text That Doesn't" );
+	// glColor3f( 1., 1., 1. );
+	// DoRasterString( 5., 5., 0., (char *)"Text That Doesn't" );
 
 	// glEnable(GL_TEXTURE_2D);
 	// glBindTexture( GL_TEXTURE_2D, Tex0 );
@@ -1018,6 +1023,12 @@ Keyboard( unsigned char c, int x, int y )
 
 	switch( c )
 	{
+		case 't':
+		case 'T':
+			if(texture){
+				texture = false;
+			} else texture = true;		
+			break;
 		case 'd':
 		case 'D':
 			if(Distort){
