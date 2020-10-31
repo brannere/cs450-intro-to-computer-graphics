@@ -612,7 +612,7 @@ Display( )
 	glPopMatrix( );
 
 	float lightpos[] = {.5, 1., 1., 0.};
-	// glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+	glLightfv(GL_LIGHT0, GL_POSITION, Array3(-5,-5,-5));
 	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
 	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
 	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
