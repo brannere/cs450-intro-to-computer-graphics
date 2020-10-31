@@ -20,6 +20,29 @@ float Time;
 GLuint Tex0, Tex1;
 bool texture;
 
+float White[] = {1.f,1.f,1.f,1.f,1.f};
+
+float*
+Array3( float a, float b, float c )
+{
+	static float array[4];
+	array[0] = a;
+	array[1] = b;
+	array[2] = c;
+	array[3] = 1.;
+	return array;
+}
+
+float *
+MulArray3( float factor, float array0[3] )
+{
+	static float array[4];
+	array[0] = factor * array0[0];
+	array[1] = factor * array0[1];
+	array[2] = factor * array0[2];
+	array[3] = 1.;
+	return array;
+}
 
 //	This is a sample OpenGL / GLUT program
 //
@@ -582,17 +605,22 @@ Display( )
 	// glBegin( GL_QUADS );
 	glDisable( GL_LIGHTING );
 
-glPushMatrix( );
+	glPushMatrix( );
+	   glTranslatef(5,5,5);
+	   glColor3f( 1., 1., 1. );
+	   glutSolidSphere( 0.2, 30, 30 );
+	glPopMatrix( );
 
-   glTranslatef(5,5,5);
-
-   glColor3f( 1., 1., 1. );
-
-   glutSolidSphere( 0.2, 30, 30 );
-
-glPopMatrix( );
+	float lightpos[] = {.5, 1., 1., 0.};
+	// glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
+	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
+	// GLfloat diffuse ={1.0f, 1.0f, 0.0f, 1.0f};
 
 glEnable( GL_LIGHTING );
+glEnable(GL_LIGHT0);
+  glColor3f ( 1.0f, 0.0f, 0.0f ) ;
 	MjbSphere(1,100,100);
 	glEnd( );
 	glDisable( GL_TEXTURE_2D );
@@ -603,6 +631,7 @@ glEnable( GL_LIGHTING );
 			glCallList( BoxList );
 		glPopMatrix( );
 	}
+	glDisable( GL_LIGHTING );
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
