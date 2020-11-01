@@ -647,26 +647,35 @@ Display( )
 	// glBegin( GL_QUADS );
 	glDisable( GL_LIGHTING );
 
+	/* Light 0 */
+
+	int l0_posx = 2; 
+	int l0_posy = 2; 
+	int l0_posz = 2; 
+
 	glPushMatrix( );
-	   glTranslatef(5,5,5);
+	   glTranslatef(l0_posx,l0_posy,l0_posz);
 	   glColor3f( 1., 1., 1. );
 	   glutSolidSphere( 0.2, 30, 30 );
 	glPopMatrix( );
 
-
 	glEnable( GL_LIGHTING );
-	// SetSpotLight(GL_LIGHT0, 5,5,5, 0,0,0, 0,1,0);
-	glLightfv(GL_LIGHT0, GL_POSITION, Array3(5,5,5));
+
+	
+	glLightfv( GL_LIGHT0, GL_POSITION, Array3(l0_posx,l0_posy,l0_posz));
 	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
-	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, Array3(0,0,0));
+	glLightfv( GL_LIGHT0, GL_SPOT_DIRECTION, Array3(0,0,0));
 	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
-	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 1, 1, 1 ) );
+	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 0, 1, 0 ) );
 	glLightfv( GL_LIGHT0, GL_SPECULAR, Array3( 1, 1, 1 ) );
+	glEnable(GL_LIGHT0);
 	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
 	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
-	// GLfloat diffuse ={1.0f, 1.0f, 0.0f, 1.0f};
 
-	glEnable(GL_LIGHT0);
+	/* End of light 0 */	
+	
+	glShadeModel( GL_FLAT );	
+
   glColor3f ( 1.0f, 0.0f, 0.0f ) ;
 	MjbSphere(1,100,100);
 	glEnd( );
@@ -680,6 +689,42 @@ Display( )
 	}
 	glDisable( GL_LIGHTING );
 
+
+	/* Light 1 */
+
+	int l1_posx = -2.5; 
+	int l1_posy = -2.5; 
+	int l1_posz = -2.5; 
+
+	glPushMatrix( );
+	   glTranslatef(l1_posx,l1_posy,l1_posz);
+	   glColor3f( 1., 1., 1. );
+	   glutSolidSphere( 0.2, 30, 30 );
+	glPopMatrix( );
+
+	glEnable( GL_LIGHTING );
+
+	
+	glLightfv( GL_LIGHT1, GL_POSITION, Array3(l1_posx,l1_posy,l1_posz));
+	glLightfv( GL_LIGHT1, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	// glLightfv( GL_LIGHT1, GL_SPOT_DIRECTION, Array3(0,0,0));
+	glLightfv( GL_LIGHT1, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT1, GL_DIFFUSE, Array3( 1, 1, 1 ) );
+	glLightfv( GL_LIGHT1, GL_SPECULAR, Array3( 1, 1, 1 ) );
+	glEnable(GL_LIGHT1);
+	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
+	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
+
+	/* End of light 1 */	
+	
+	
+	glShadeModel( GL_SMOOTH );	
+	glPushMatrix();
+		glTranslatef(-5,-5,-5);
+		// glRotatef(37, 0, 0, 1);
+		glutSolidTeapot(2);
+	glPopMatrix();
+	glDisable( GL_LIGHTING );
 
 	// draw some gratuitous text that just rotates on top of the scene:
 
