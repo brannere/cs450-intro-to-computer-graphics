@@ -20,6 +20,8 @@ float Time;
 GLuint Tex0, Tex1;
 bool texture;
 
+/* Functions added for project */
+
 float White[] = {1.f,1.f,1.f,1.f,1.f};
 
 float*
@@ -43,6 +45,38 @@ MulArray3( float factor, float array0[3] )
 	array[3] = 1.;
 	return array;
 }
+
+void
+SetPointLight( int ilight, float x, float y, float z, float r, float g, float b )
+{
+	glLightfv( ilight, GL_POSITION, Array3( x, y, z ) );
+	glLightfv( ilight, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( ilight, GL_DIFFUSE, Array3( r, g, b ) );
+	glLightfv( ilight, GL_SPECULAR, Array3( r, g, b ) );
+	// glLightf ( ilight, GL_CONSTANT_ATTENUATION, 1. );
+	// glLightf ( ilight, GL_LINEAR_ATTENUATION, 0. );
+	// glLightf ( ilight, GL_QUADRATIC_ATTENUATION, 0. );
+	glEnable( ilight );
+}
+
+void
+SetSpotLight( int ilight, float x, float y, float z, float xdir, float ydir, float zdir, float r, float g, float b )
+{
+	glLightfv( ilight, GL_POSITION, Array3( x, y, z ) );
+	glLightfv( ilight, GL_SPOT_DIRECTION, Array3(xdir,ydir,zdir) );
+	glLightf( ilight, GL_SPOT_EXPONENT, 1. );
+	glLightf( ilight, GL_SPOT_CUTOFF, 45. );
+	glLightfv( ilight, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( ilight, GL_DIFFUSE, Array3( r, g, b ) );
+	glLightfv( ilight, GL_SPECULAR, Array3( r, g, b ) );
+	// glLightf ( ilight, GL_CONSTANT_ATTENUATION, 1. );
+	// glLightf ( ilight, GL_LINEAR_ATTENUATION, 0. );
+	// glLightf ( ilight, GL_QUADRATIC_ATTENUATION, 0. );
+	glEnable( ilight );
+}
+
+
+/******************************/
 
 //	This is a sample OpenGL / GLUT program
 //
@@ -107,6 +141,14 @@ const float SCLFACT = { 0.005f };
 // minimum allowable scale factor:
 
 const float MINSCALE = { 0.05f };
+// scroll wheel button values:
+
+const int SCROLL_WHEEL_UP   = { 3 };
+const int SCROLL_WHEEL_DOWN = { 4 };
+
+// equivalent mouse movement when we click a the scroll wheel:
+
+const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
 
 
 // active mouse buttons (or them together):
@@ -611,15 +653,20 @@ Display( )
 	   glutSolidSphere( 0.2, 30, 30 );
 	glPopMatrix( );
 
-	float lightpos[] = {.5, 1., 1., 0.};
-	glLightfv(GL_LIGHT0, GL_POSITION, Array3(-5,-5,-5));
+
+	glEnable( GL_LIGHTING );
+	// SetSpotLight(GL_LIGHT0, 5,5,5, 0,0,0, 0,1,0);
+	glLightfv(GL_LIGHT0, GL_POSITION, Array3(5,5,5));
 	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, Array3(0,0,0));
+	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 1, 1, 1 ) );
+	glLightfv( GL_LIGHT0, GL_SPECULAR, Array3( 1, 1, 1 ) );
 	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
 	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
 	// GLfloat diffuse ={1.0f, 1.0f, 0.0f, 1.0f};
 
-glEnable( GL_LIGHTING );
-glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT0);
   glColor3f ( 1.0f, 0.0f, 0.0f ) ;
 	MjbSphere(1,100,100);
 	glEnd( );
@@ -1127,6 +1174,20 @@ MouseButton( int button, int state, int x, int y )
 
 		case GLUT_RIGHT_BUTTON:
 			b = RIGHT;		break;
+		
+		case SCROLL_WHEEL_UP:
+			Scale += SCLFACT * SCROLL_WHEEL_CLICK_FACTOR;
+			// keep object from turning inside-out or disappearing:
+			if (Scale < MINSCALE)
+				Scale = MINSCALE;
+			break;
+
+		case SCROLL_WHEEL_DOWN:
+			Scale -= SCLFACT * SCROLL_WHEEL_CLICK_FACTOR;
+			// keep object from turning inside-out or disappearing:
+			if (Scale < MINSCALE)
+				Scale = MINSCALE;
+			break;
 
 		default:
 			b = 0;
