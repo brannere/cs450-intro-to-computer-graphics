@@ -24,7 +24,7 @@ bool texture;
 bool light0 = false;
 bool light1 = false;
 bool light2 = false;
-
+bool Frozen = false;
 /* Functions added for project */
 
 float White[] = {1.f,1.f,1.f,1.f,1.f};
@@ -1222,12 +1222,17 @@ Keyboard( unsigned char c, int x, int y )
 
 	switch( c )
 	{
-		case 't':
-		case 'T':
-			if(texture){
-				texture = false;
-			} else texture = true;		
-			break;
+		
+
+	case 'f':
+	case 'F':
+		Frozen = ! Frozen;
+		if( Frozen )
+			glutIdleFunc( NULL );
+		else
+			glutIdleFunc( Animate );
+		break;
+
 		case '1':
 			if(light0){
 				light0 = false;
