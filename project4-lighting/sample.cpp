@@ -670,8 +670,8 @@ Display( )
 	glLightf( GL_LIGHT0, GL_SPOT_EXPONENT, 1. );
 	glLightf( GL_LIGHT0, GL_SPOT_CUTOFF, 30. );
 	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 1. ) );
-	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 1, 1, 1 ) );
-	glLightfv( GL_LIGHT0, GL_SPECULAR, Array3( 1, 1, 1 ) );
+	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 0, 0, 1 ) );
+	glLightfv( GL_LIGHT0, GL_SPECULAR, Array3( 0, 0, 1 ) );
 	
 	if(light0){
 		glEnable(GL_LIGHT0);
@@ -729,13 +729,13 @@ Display( )
 	
 	glShadeModel( GL_SMOOTH );	
 	glPushMatrix();
-		glMaterialf(GL_FRONT, GL_SHININESS, 8);
+		glMaterialf(GL_FRONT, GL_SHININESS, 2);
 		glTranslatef(-5,0,0);
 		// glRotatef(37, 0, 0, 1);
 		glutSolidTeapot(2);
 	glPopMatrix();
 	glPushMatrix();
-		glMaterialf(GL_FRONT, GL_SHININESS, 8);
+		glMaterialf(GL_FRONT, GL_SHININESS, 100);
 		glTranslatef(7,0,0);
 		// glRotatef(37, 0, 0, 1);
 		glutSolidTeapot(2);
