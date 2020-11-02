@@ -1222,17 +1222,21 @@ Keyboard( unsigned char c, int x, int y )
 
 	switch( c )
 	{
-		
+		case 'f':
+		case 'F':
+			Frozen = ! Frozen;
+			if( Frozen )
+				glutIdleFunc( NULL );
+			else
+				glutIdleFunc( Animate );
+			break;
 
-	case 'f':
-	case 'F':
-		Frozen = ! Frozen;
-		if( Frozen )
-			glutIdleFunc( NULL );
-		else
-			glutIdleFunc( Animate );
-		break;
-
+		case 't':
+		case 'T':
+			if(texture){
+				texture = false;
+			} else texture = true;		
+			break;
 		case '1':
 			if(light0){
 				light0 = false;
