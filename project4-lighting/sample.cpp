@@ -19,7 +19,9 @@ const int MS_PER_CYCLE = 1000;
 float Time;
 GLuint Tex0, Tex1;
 bool texture;
-
+bool light0 = false;
+bool light1 = false;
+bool light2 = false;
 /* Functions added for project */
 
 float White[] = {1.f,1.f,1.f,1.f,1.f};
@@ -513,7 +515,7 @@ Animate( )
 {
 	// put animation stuff in here -- change some global variables
 	// for Display( ) to find:
-
+	// Y_POS = 360*Time;
 	// force a call to Display( ) next time it is convenient:
 	int ms = glutGet( GLUT_ELAPSED_TIME );
 	ms %= MS_PER_CYCLE;
@@ -650,12 +652,12 @@ Display( )
 	/* Light 0 */
 
 	int l0_posx = 2; 
-	int l0_posy = 2; 
-	int l0_posz = 2; 
+	int l0_posy = 0; 
+	int l0_posz = 0; 
 
 	glPushMatrix( );
 	   glTranslatef(l0_posx,l0_posy,l0_posz);
-	   glColor3f( 1., 1., 1. );
+	   glColor3f( 0., 0., 1. );
 	   glutSolidSphere( 0.2, 30, 30 );
 	glPopMatrix( );
 
@@ -663,13 +665,17 @@ Display( )
 
 	
 	glLightfv( GL_LIGHT0, GL_POSITION, Array3(l0_posx,l0_posy,l0_posz));
-	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
-	glLightfv( GL_LIGHT0, GL_SPOT_DIRECTION, Array3(0,0,0));
-	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
-	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 0, 1, 0 ) );
+	// glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT0, GL_SPOT_DIRECTION, Array3(-1,0,0));
+	glLightf( GL_LIGHT0, GL_SPOT_EXPONENT, 1. );
+	glLightf( GL_LIGHT0, GL_SPOT_CUTOFF, 30. );
+	glLightfv( GL_LIGHT0, GL_AMBIENT, Array3( 0., 0., 1. ) );
+	glLightfv( GL_LIGHT0, GL_DIFFUSE, Array3( 1, 1, 1 ) );
 	glLightfv( GL_LIGHT0, GL_SPECULAR, Array3( 1, 1, 1 ) );
-	glEnable(GL_LIGHT0);
-	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
+	
+	if(light0){
+		glEnable(GL_LIGHT0);
+	} else glDisable(GL_LIGHT0);	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
 	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
 
 	/* End of light 0 */	
@@ -693,13 +699,14 @@ Display( )
 	/* Light 1 */
 
 	int l1_posx = -2.5; 
-	int l1_posy = -2.5; 
-	int l1_posz = -2.5; 
+	int l1_posy = 0; 
+	int l1_posz = 0; 
 
 	glPushMatrix( );
-	   glTranslatef(l1_posx,l1_posy,l1_posz);
-	   glColor3f( 1., 1., 1. );
-	   glutSolidSphere( 0.2, 30, 30 );
+		glMaterialf(GL_FRONT, GL_SHININESS, 1);
+	  glTranslatef(l1_posx,l1_posy,l1_posz);
+	  glColor3f( 1., 1., 1. );
+	  glutSolidSphere( 0.2, 30, 30 );
 	glPopMatrix( );
 
 	glEnable( GL_LIGHTING );
@@ -708,10 +715,12 @@ Display( )
 	glLightfv( GL_LIGHT1, GL_POSITION, Array3(l1_posx,l1_posy,l1_posz));
 	glLightfv( GL_LIGHT1, GL_AMBIENT, Array3( 0., 0., 0. ) );
 	// glLightfv( GL_LIGHT1, GL_SPOT_DIRECTION, Array3(0,0,0));
-	glLightfv( GL_LIGHT1, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT1, GL_AMBIENT, Array3( 1., 1., 1. ) );
 	glLightfv( GL_LIGHT1, GL_DIFFUSE, Array3( 1, 1, 1 ) );
 	glLightfv( GL_LIGHT1, GL_SPECULAR, Array3( 1, 1, 1 ) );
-	glEnable(GL_LIGHT1);
+	if(light1){
+		glEnable(GL_LIGHT1);
+	} else glDisable(GL_LIGHT1);
 	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
 	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
 
@@ -720,10 +729,61 @@ Display( )
 	
 	glShadeModel( GL_SMOOTH );	
 	glPushMatrix();
-		glTranslatef(-5,-5,-5);
+		glMaterialf(GL_FRONT, GL_SHININESS, 8);
+		glTranslatef(-5,0,0);
 		// glRotatef(37, 0, 0, 1);
 		glutSolidTeapot(2);
 	glPopMatrix();
+	glPushMatrix();
+		glMaterialf(GL_FRONT, GL_SHININESS, 8);
+		glTranslatef(7,0,0);
+		// glRotatef(37, 0, 0, 1);
+		glutSolidTeapot(2);
+	glPopMatrix();
+
+	glDisable( GL_LIGHTING );
+	/* MOVING LIGHT */
+	/* Light 2 */
+
+	int l2_posx = 0; 
+	int l2_posy = 7; 
+	int l2_posz = 0; 
+
+	glPushMatrix( );
+	   glTranslatef(l2_posx,l2_posy,l2_posz);
+	   glColor3f( 1., 0., 0. );
+	   glutSolidSphere( 0.2, 30, 30 );
+	glPopMatrix( );
+
+	glEnable( GL_LIGHTING );
+
+	
+	glLightfv( GL_LIGHT2, GL_POSITION, Array3(l2_posx,l2_posy,l2_posz));
+	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
+	// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
+	// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
+	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 1., 0., 0. ) );
+	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 1 ) );
+	glLightfv( GL_LIGHT2, GL_SPECULAR, Array3( 1, 1, 1 ) );
+	if(light2){
+		glEnable(GL_LIGHT2);
+	} else glDisable(GL_LIGHT2);
+
+	// glLightfv( GL_LIGHT0, GL_DIFFUSE, 1);
+	// glLightfv( GL_LIGHT0, GL_SPECULAR, 1);
+
+	/* End of light 2 */	
+
+	glPushMatrix( );
+	   glTranslatef(l2_posx,l2_posy,l2_posz);
+		 glRotatef(90,1,0,0);
+	   glColor3f( 1., 0., 0. );
+		glutSolidTorus( 0.5, 1, 4, 100 );
+	glPopMatrix( );
+	
+	// a moving shape
+
 	glDisable( GL_LIGHTING );
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -1163,11 +1223,20 @@ Keyboard( unsigned char c, int x, int y )
 				texture = false;
 			} else texture = true;		
 			break;
-		case 'd':
-		case 'D':
-			if(Distort){
-				Distort = false;
-			} else Distort = true;
+		case '0':
+			if(light0){
+				light0 = false;
+			} else light0 = true;
+			break;
+		case '1':
+			if(light1){
+				light1 = false;
+			} else light1 = true;
+			break;
+		case '2':
+			if(light2){
+				light2 = false;
+			} else light2 = true;
 			break;
 		case 'o':
 		case 'O':
