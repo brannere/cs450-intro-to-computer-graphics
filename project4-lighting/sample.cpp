@@ -15,13 +15,16 @@
 #include <GL/glu.h>
 #include "glut.h"
 #include "bmptotexture.cpp"
-const int MS_PER_CYCLE = 1000; 
+const int MS_PER_CYCLE = 100000; 
 float Time;
+float ANGLE; 
+
 GLuint Tex0, Tex1;
 bool texture;
 bool light0 = false;
 bool light1 = false;
 bool light2 = false;
+
 /* Functions added for project */
 
 float White[] = {1.f,1.f,1.f,1.f,1.f};
@@ -107,7 +110,7 @@ SetSpotLight( int ilight, float x, float y, float z, float xdir, float ydir, flo
 
 // title of these windows:
 
-const char *WINDOWTITLE = { "OpenGL / GLUT Sample -- Joe Graphics" };
+const char *WINDOWTITLE = { "OpenGL / Project 4 - Lighting -- Erick Branner" };
 const char *GLUITITLE   = { "User Interface Window" };
 
 
@@ -520,6 +523,7 @@ Animate( )
 	int ms = glutGet( GLUT_ELAPSED_TIME );
 	ms %= MS_PER_CYCLE;
 	Time = (float)ms / (float)MS_PER_CYCLE;
+	ANGLE = 360*Time; 
 	// fprintf(stdout, "Animate\n");		
 
 	glutSetWindow( MainWindow );
@@ -744,10 +748,10 @@ Display( )
 	glDisable( GL_LIGHTING );
 	/* MOVING LIGHT */
 	/* Light 2 */
-
+	int radius = 7;
 	int l2_posx = 0; 
-	int l2_posy = 7; 
-	int l2_posz = 0; 
+	int l2_posy = radius*cos(ANGLE);
+	int l2_posz = radius*sin(ANGLE); 
 
 	glPushMatrix( );
 	   glTranslatef(l2_posx,l2_posy,l2_posz);
@@ -763,8 +767,8 @@ Display( )
 	glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
 	// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
 	// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
-	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 1., 0., 0. ) );
-	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 1 ) );
+	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 0, 0 ) );
 	glLightfv( GL_LIGHT2, GL_SPECULAR, Array3( 1, 1, 1 ) );
 	if(light2){
 		glEnable(GL_LIGHT2);
@@ -775,11 +779,12 @@ Display( )
 
 	/* End of light 2 */	
 
+	glShadeModel( GL_FLAT );	
 	glPushMatrix( );
 	   glTranslatef(l2_posx,l2_posy,l2_posz);
 		 glRotatef(90,1,0,0);
 	   glColor3f( 1., 0., 0. );
-		glutSolidTorus( 0.5, 1, 4, 100 );
+		glutSolidTorus( 0.5, 1, 4, 50 );
 	glPopMatrix( );
 	
 	// a moving shape
@@ -1113,7 +1118,7 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 	int width, height;
-	unsigned char * TextureArray0 = BmpToTexture("worldtex.bmp", &width, &height );
+	// unsigned char * TextureArray0 = BmpToTexture("worldtex.bmp", &width, &height );
 	glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 	glGenTextures( 1, &Tex0 );
 	glGenTextures( 1, &Tex1 );
@@ -1123,7 +1128,7 @@ InitGraphics( )
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray0);
+	// glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray0);
 
 }
 
@@ -1223,17 +1228,17 @@ Keyboard( unsigned char c, int x, int y )
 				texture = false;
 			} else texture = true;		
 			break;
-		case '0':
+		case '1':
 			if(light0){
 				light0 = false;
 			} else light0 = true;
 			break;
-		case '1':
+		case '2':
 			if(light1){
 				light1 = false;
 			} else light1 = true;
 			break;
-		case '2':
+		case '3':
 			if(light2){
 				light2 = false;
 			} else light2 = true;
