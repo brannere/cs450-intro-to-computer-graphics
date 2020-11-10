@@ -16,6 +16,7 @@
 #include "glut.h"
 #include <map>
 #include <stdarg.h>
+#include <cstring>
 
 #ifndef GL_COMPUTE_SHADER
 #define GL_COMPUTE_SHADER	0x91B9

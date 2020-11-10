@@ -14,11 +14,13 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "glut.h"
-#include "bmptotexture.cpp"
+// #include "bmptotexture.cpp"
 #include "glslprogram.h"
 const int MS_PER_CYCLE = 100000; 
 float Time;
 float ANGLE; 
+
+GLSLProgram * Pattern;
 
 GLuint Tex0, Tex1;
 bool texture;
@@ -640,6 +642,9 @@ Display( )
 	// since we are using glScalef( ), be sure normals get unitized:
 	/* Light 0 */
 
+	Pattern->Use();
+	// Pattern->SetUniformVariable
+
 	int l0_posx = 5; 
 	int l0_posy = 5; 
 	int l0_posz = 5; 
@@ -649,6 +654,8 @@ Display( )
 	   glColor3f( 0., 0., 1. );
 	   glutSolidSphere( 0.2, 30, 30 );
 	glPopMatrix( );
+
+	Pattern->Use(0);
 
 	glEnable( GL_LIGHTING );
 
@@ -1033,6 +1040,13 @@ InitGraphics( )
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
 	// glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray0);
+
+	Pattern = new GLSLProgram( );
+	bool valid = Pattern->Create( "project.vert", "project.frag" );
+	if( ! valid ) {
+		fprintf(stdout, "Something went wrong\n");
+	}
+
 
 }
 
@@ -1487,3 +1501,4 @@ HsvRgb( float hsv[3], float rgb[3] )
 	rgb[1] = g;
 	rgb[2] = b;
 }
+#include "glslprogram.cpp"
