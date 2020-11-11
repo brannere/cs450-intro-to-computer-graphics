@@ -14,13 +14,13 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "glut.h"
-//#include "glslprogram.h"
+#include "glslprogram.h"
 // #include "bmptotexture.cpp"
 const int MS_PER_CYCLE = 100000;
 float Time;
 float ANGLE;
 
-//GLSLProgram* Pattern;
+GLSLProgram* Pattern;
 
 GLuint Tex0, Tex1;
 bool texture;
@@ -642,8 +642,8 @@ Display()
 	// since we are using glScalef( ), be sure normals get unitized:
 	/* Light 0 */
 
-	//Pattern->Use();
-	// Pattern->SetUniformVariable
+	Pattern->Use();
+	//Pattern->SetUniformVariable
 
 	int l0_posx = 5;
 	int l0_posy = 5;
@@ -655,7 +655,7 @@ Display()
 	glutSolidSphere(0.2, 30, 30);
 	glPopMatrix();
 
-	//Pattern->Use(0);
+	Pattern->Use(0);
 
 	glEnable(GL_LIGHTING);
 
