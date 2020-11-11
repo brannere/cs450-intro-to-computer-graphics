@@ -1,0 +1,2 @@
+C:\Users\Erick Branner\Documents\osu\SampleFreeGlut2019\Debug\Sample.exe
+C:\Users\Erick Branner\Documents\osu\SampleFreeGlut2019\Debug\Sample.pdb
