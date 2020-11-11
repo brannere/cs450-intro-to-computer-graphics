@@ -12,8 +12,8 @@ main( )
 { 
 	vST = gl_MultiTexCoord0.st;
 	vec3 vert = gl_Vertex.xyz;
-	vert.x = ??? something fun of your own design
-	vert.y = ??? something fun of your own design
-	vert.z = ??? something fun of your own design
+	//vert.x = 1 //??? something fun of your own design
+	//vert.y = 1 //??? something fun of your own design
+	//vert.z = 1 //??? something fun of your own design
 	gl_Position = gl_ModelViewProjectionMatrix * vec4( vert, 1. );
 }

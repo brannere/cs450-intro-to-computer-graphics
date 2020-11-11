@@ -642,18 +642,32 @@ Display()
 	// since we are using glScalef( ), be sure normals get unitized:
 	/* Light 0 */
 
+	float uS0 = .5, uT0 = .5;
+	float uDs = .3, uDt = .2;
+	float V0, V1, V2;
+	float ColorR, ColorG, ColorB;
+
 	Pattern->Use();
-	//Pattern->SetUniformVariable
+	//Pattern->SetUniformVariable();
+	Pattern->SetUniformVariable("uS0", uS0);
+	Pattern->SetUniformVariable("uT0", uT0);
+	Pattern->SetUniformVariable("uDs", uDs);
+	Pattern->SetUniformVariable("uDt", uDt);
+	MjbSphere(1, 100, 100);
+	//Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB );
 
 	int l0_posx = 5;
 	int l0_posy = 5;
 	int l0_posz = 5;
 
-	glPushMatrix();
+	/*glPushMatrix();
 	glTranslatef(l0_posx, l0_posy, l0_posz);
 	glColor3f(0., 0., 1.);
 	glutSolidSphere(0.2, 30, 30);
-	glPopMatrix();
+	glPopMatrix();*/
+
+	//glColor3f(1.0f, 0.0f, 0.0f);
+	
 
 	Pattern->Use(0);
 
@@ -675,8 +689,7 @@ Display()
 
 	glShadeModel(GL_FLAT);
 
-	glColor3f(1.0f, 0.0f, 0.0f);
-	MjbSphere(1, 100, 100);
+
 
 
 
@@ -1001,19 +1014,19 @@ InitGraphics()
 	glutKeyboardFunc(Keyboard);
 	glutMouseFunc(MouseButton);
 	glutMotionFunc(MouseMotion);
-	glutPassiveMotionFunc(NULL);
+	//glutPassiveMotionFunc(NULL);
 	glutVisibilityFunc(Visibility);
-	glutEntryFunc(NULL);
-	glutSpecialFunc(NULL);
-	glutSpaceballMotionFunc(NULL);
-	glutSpaceballRotateFunc(NULL);
-	glutSpaceballButtonFunc(NULL);
-	glutButtonBoxFunc(NULL);
-	glutDialsFunc(NULL);
-	glutTabletMotionFunc(NULL);
+	//glutEntryFunc(NULL);
+	//glutSpecialFunc(NULL);
+	//glutSpaceballMotionFunc(NULL);
+	//glutSpaceballRotateFunc(NULL);
+	//glutSpaceballButtonFunc(NULL);
+	//glutButtonBoxFunc(NULL);
+	//glutDialsFunc(NULL);
+	/*glutTabletMotionFunc(NULL);
 	glutTabletButtonFunc(NULL);
 	glutMenuStateFunc(NULL);
-	glutTimerFunc(-1, NULL, 0);
+	glutTimerFunc(-1, NULL, 0);*/
 	glutIdleFunc(Animate);
 
 	// init glew (a window must be open to do this):
@@ -1041,11 +1054,15 @@ InitGraphics()
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	// glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray0);
 
-	/*Pattern = new GLSLProgram();
-	bool valid = Pattern->Create("project.vert", "project.frag");
+	Pattern = new GLSLProgram();
+	bool valid = Pattern->Create("pattern.vert", "pattern.frag");
 	if (!valid) {
-		fprintf(stdout, "Something went wrong\n");
-	}*/
+		fprintf(stderr, "Something went wrong\n");
+		exit(1);
+	}
+	else {
+		fprintf(stdout, "shader created\n");
+	}
 
 
 }
