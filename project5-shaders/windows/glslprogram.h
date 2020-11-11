@@ -10,7 +10,7 @@
 #include <windows.h>
 #endif
 
-// #include "glew.h"
+#include "glew.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "glut.h"

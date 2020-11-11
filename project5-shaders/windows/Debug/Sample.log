@@ -1,3 +1,23 @@
 ﻿  sample.cpp
-sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  Sample.vcxproj -> C:\Users\Erick Branner\Documents\osu\SampleFreeGlut2019\Debug\Sample.exe
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(353,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(354,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(355,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(358,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(359,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(360,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(370,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(376,39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(384,25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(385,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(470,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(653,33): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(653,24): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(653,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(663,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(663,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(663,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1031,13): warning C4101: 'height': unreferenced local variable
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1031,6): warning C4101: 'width': unreferenced local variable
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1469,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+glslprogram.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+  Sample.vcxproj -> C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\Debug\Sample.exe
