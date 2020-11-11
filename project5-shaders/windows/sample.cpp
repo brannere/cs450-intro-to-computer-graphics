@@ -649,10 +649,11 @@ Display()
 
 	Pattern->Use();
 	//Pattern->SetUniformVariable();
-	Pattern->SetUniformVariable("uS0", uS0);
-	Pattern->SetUniformVariable("uT0", uT0);
-	Pattern->SetUniformVariable("uDs", uDs);
-	Pattern->SetUniformVariable("uDt", uDt);
+	Pattern->SetUniformVariable("uS0", Time * uS0);
+	Pattern->SetUniformVariable("uT0", Time * uT0);
+	Pattern->SetUniformVariable("uDs", Time * uDs);
+	Pattern->SetUniformVariable("uDt", Time * uDt);
+	Pattern->SetUniformVariable("uTime", Time);
 	MjbSphere(1, 100, 100);
 	//Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB );
 
