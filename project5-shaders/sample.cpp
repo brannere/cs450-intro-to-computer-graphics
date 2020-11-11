@@ -14,8 +14,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "glut.h"
-// #include "bmptotexture.cpp"
 #include "glslprogram.h"
+// #include "bmptotexture.cpp"
 const int MS_PER_CYCLE = 100000; 
 float Time;
 float ANGLE; 
