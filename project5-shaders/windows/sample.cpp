@@ -29,6 +29,7 @@ bool light0 = false;
 bool light1 = false;
 bool light2 = false;
 bool Frozen = false;
+bool DoVert = false;
 /* Functions added for project */
 
 float White[] = { 1.f,1.f,1.f,1.f,1.f };
@@ -648,13 +649,27 @@ Display()
 	float V0, V1, V2;
 	float ColorR, ColorG, ColorB;
 	float randn = rand()%2; 
+	float A = 1; 
+	float B = 1;
+	float C = 1;
+
+	//if (DoPattern) {
+
+	//vert.x = uTime*(vert.x)*tan(vert.z); //??? something fun of your own design
+	//vert.y = uTime*(vert.y)*sin(vert.x); //??? something fun of your own design
+	//vert.z = uTime*(vert.z)*cos(vert.y);
+		/*A = Time;
+		B = Time;
+		C = Time;*/
+	//}
 
 	Pattern->Use();
 	//Pattern->SetUniformVariable();
+	Pattern->SetUniformVariable("uAnimate", DoVert);
 	Pattern->SetUniformVariable("uS0", uS0);
-	Pattern->SetUniformVariable("uT0", Time * uT0);
-	Pattern->SetUniformVariable("uDs", Time * uDs);
-	Pattern->SetUniformVariable("uDt", Time * uDt);
+	Pattern->SetUniformVariable("uT0", uT0);
+	Pattern->SetUniformVariable("uDs", uDs);
+	Pattern->SetUniformVariable("uDt", uDt);
 	Pattern->SetUniformVariable("uTime", Time);
 	//Pattern->SetUniformVariable("uRand", randn*.2f);
 	MjbSphere(1, 100, 100);
@@ -1125,7 +1140,14 @@ Keyboard(unsigned char c, int x, int y)
 		else
 			glutIdleFunc(Animate);
 		break;
-
+	case 'V':
+	case 'v':
+		if (DoVert) {
+			DoVert = false;
+		}
+		else DoVert = true;
+		fprintf(stdout, "DoVert: %d\n", DoVert);
+		break;
 	case 't':
 	case 'T':
 		if (texture) {

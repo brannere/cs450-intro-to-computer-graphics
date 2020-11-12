@@ -1,4 +1,15 @@
 
-ERROR: 0:17: ';' : syntax error syntax error
+ERROR: 0:20: 'vert' : undeclared identifier 
+ERROR: 0:20: 'x' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:20: 'x' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:20: 'z' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:21: 'y' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:21: 'y' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:21: 'x' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:22: 'z' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:22: 'z' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:22: 'y' : field selection requires structure, vector, or matrix on left hand side 
+ERROR: 0:24: 'vert' : undeclared identifier 
+ERROR: 0:25: 'constructor' : not enough data provided for construction 
 
 
