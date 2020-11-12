@@ -1,5 +1,4 @@
 
-ERROR: 0:15: '' : syntax error: preprocessor directive must be first token on the line
-ERROR: 0:? : 'pre-mature EOF' : syntax error syntax error
+ERROR: 0:17: ';' : syntax error syntax error
 
 

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <cstdlib>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -16,7 +17,7 @@
 #include "glut.h"
 #include "glslprogram.h"
 // #include "bmptotexture.cpp"
-const int MS_PER_CYCLE = 100000;
+const int MS_PER_CYCLE = 10000;
 float Time;
 float ANGLE;
 
@@ -646,14 +647,16 @@ Display()
 	float uDs = .3, uDt = .2;
 	float V0, V1, V2;
 	float ColorR, ColorG, ColorB;
+	float randn = rand()%2; 
 
 	Pattern->Use();
 	//Pattern->SetUniformVariable();
-	Pattern->SetUniformVariable("uS0", Time * uS0);
+	Pattern->SetUniformVariable("uS0", uS0);
 	Pattern->SetUniformVariable("uT0", Time * uT0);
 	Pattern->SetUniformVariable("uDs", Time * uDs);
 	Pattern->SetUniformVariable("uDt", Time * uDt);
 	Pattern->SetUniformVariable("uTime", Time);
+	//Pattern->SetUniformVariable("uRand", randn*.2f);
 	MjbSphere(1, 100, 100);
 	//Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB );
 
