@@ -18,9 +18,10 @@ main( )
 	vec3 Eye        = normalize(vE);
 
 	vec3 myColor = uColor;
-	if( ??? )
+	if( True )
 	{
-		myColor = ???;
+		myColor = vec3(1,1,;
+
 	}
 
 	vec3 ambient = uKa * myColor;

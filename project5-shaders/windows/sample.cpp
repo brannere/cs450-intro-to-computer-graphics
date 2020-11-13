@@ -663,6 +663,10 @@ Display()
 		C = Time;*/
 	//}
 
+	ColorR = 1.;
+	ColorG = 1.; 
+	ColorB = 1.;
+
 	Pattern->Use();
 	//Pattern->SetUniformVariable();
 	Pattern->SetUniformVariable("uAnimate", DoVert);
@@ -673,7 +677,7 @@ Display()
 	Pattern->SetUniformVariable("uTime", Time);
 	//Pattern->SetUniformVariable("uRand", randn*.2f);
 	MjbSphere(1, 100, 100);
-	//Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB );
+	Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB );
 
 	int l0_posx = 5;
 	int l0_posy = 5;

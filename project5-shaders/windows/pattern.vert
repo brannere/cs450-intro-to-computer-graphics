@@ -1,6 +1,14 @@
 #version 330 compatibility
 
 uniform float	uTime;		// "Time", from Animate( )
+
+//out vec2 vST;
+out vec3 vN;
+out vec3 vL;
+out vec3 vE;
+
+const vec3 LIGHTPOSITION = vec3(5.,5.,0.);
+
 out vec2  	vST;		// texture coords
 uniform bool uAnimate;
 
@@ -11,6 +19,8 @@ const float W = 	2.;		// frequency
 void
 main( )
 { 
+	
+
 	vST = gl_MultiTexCoord0.st;
 	vec3 vert = gl_Vertex.xyz;
 	//vert.x = uTime*vert.x;

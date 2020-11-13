@@ -1,15 +1,6 @@
 
-ERROR: 0:20: 'vert' : undeclared identifier 
-ERROR: 0:20: 'x' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:20: 'x' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:20: 'z' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:21: 'y' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:21: 'y' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:21: 'x' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:22: 'z' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:22: 'z' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:22: 'y' : field selection requires structure, vector, or matrix on left hand side 
-ERROR: 0:24: 'vert' : undeclared identifier 
-ERROR: 0:25: 'constructor' : not enough data provided for construction 
+ERROR: 0:37: 'uKa' : undeclared identifier 
+ERROR: 0:40: 'uKd' : undeclared identifier 
+ERROR: 0:48: 'uKs' : undeclared identifier 
 
 
