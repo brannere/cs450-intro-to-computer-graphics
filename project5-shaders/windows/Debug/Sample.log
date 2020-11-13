@@ -13,14 +13,14 @@ C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-s
 C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(648,16): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(648,26): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(651,14): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(700,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(700,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(700,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(704,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(704,52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(704,43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(649,12): warning C4101: 'V1': unreferenced local variable
 C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(649,8): warning C4101: 'V0': unreferenced local variable
 C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(649,16): warning C4101: 'V2': unreferenced local variable
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1067,13): warning C4101: 'height': unreferenced local variable
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1067,6): warning C4101: 'width': unreferenced local variable
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1516,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1071,13): warning C4101: 'height': unreferenced local variable
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1071,6): warning C4101: 'width': unreferenced local variable
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\sample.cpp(1520,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 glslprogram.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
   Sample.vcxproj -> C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project5-shaders\windows\Debug\Sample.exe

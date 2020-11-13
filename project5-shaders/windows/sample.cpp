@@ -675,9 +675,14 @@ Display()
 	Pattern->SetUniformVariable("uDs", uDs);
 	Pattern->SetUniformVariable("uDt", uDt);
 	Pattern->SetUniformVariable("uTime", Time);
-	//Pattern->SetUniformVariable("uRand", randn*.2f);
-	MjbSphere(1, 100, 100);
+	Pattern->SetUniformVariable("uKa", 0.5f);
+	Pattern->SetUniformVariable("uKd", 0.5f);
+	Pattern->SetUniformVariable("uKs", 0.5f);
 	Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB );
+	//Pattern->SetUniformVariable("uRand", randn*.2f);
+	
+	MjbSphere(1, 100, 100);
+	Pattern->Use(0);
 
 	int l0_posx = 5;
 	int l0_posy = 5;
@@ -692,7 +697,6 @@ Display()
 	//glColor3f(1.0f, 0.0f, 0.0f);
 	
 
-	Pattern->Use(0);
 
 	glEnable(GL_LIGHTING);
 
