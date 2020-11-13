@@ -29,7 +29,7 @@ main( )
 	vec3 Light     = normalize(vL);
 	vec3 Eye        = normalize(vE);
 	vec3 myColor = vec3( 1,1,0 );
-	/*if
+	if
 	( 
 		uS0 - uDs/2. <= vST.s && vST.s <= uS0 + uDs/2. &&
 		uT0 - uDt/2. <= vST.t && vST.t <= uT0 + uDt/2. 
@@ -39,7 +39,7 @@ main( )
 	}
 	else{
 		vec3 myColor = vec3( 0,0,1 );
-	}*/
+	}
 
 	//gl_FragColor = vec4( myColor,  1. );
 

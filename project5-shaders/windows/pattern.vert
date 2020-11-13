@@ -36,12 +36,13 @@ main( )
 	//vert.x = uTime*vert.x;
 	//vert.y = uTime*vert.y;
 	//vert.z = uTime*vert.z;
-	//if(uAnimate){
+	if(uAnimate){
+		//vec3 vert = gl_Vertex.xyz;
 		//vert.x = uTime*vert.x;
 		vert.x =  (1 + 0.5* sin(2*PI*W*uTime))* vert.x;
 		//vert.x = uTime*(vert.x)*tan(vert.z); //??? something fun of your own design
-		//vert.y = uTime*(vert.y)*sin(vert.x); //??? something fun of your own design
-		//vert.z = uTime*(vert.z)*cos(vert.y); //??? something fun of your own design
-	//}
+		vert.y = uTime*(vert.y)*sin(vert.x); //??? something fun of your own design
+		vert.z = uTime*(vert.z)*cos(vert.y); //??? something fun of your own design
+	}
 	gl_Position = gl_ModelViewProjectionMatrix * vec4( vert, 1. );
 }
