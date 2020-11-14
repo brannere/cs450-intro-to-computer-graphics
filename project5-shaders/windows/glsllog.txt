@@ -1,6 +1,4 @@
 
-ERROR: 0:25: 'assign' : l-value required "uKa" (cannot modify a uniform)
-ERROR: 0:26: 'assign' : l-value required "uKd" (cannot modify a uniform)
-ERROR: 0:27: 'assign' : l-value required "uKs" (cannot modify a uniform)
+ERROR: 0:36: 'else' : syntax error syntax error
 
 

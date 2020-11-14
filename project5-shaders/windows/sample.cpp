@@ -671,9 +671,9 @@ Display()
 	//Pattern->SetUniformVariable();
 	Pattern->SetUniformVariable("uAnimate", DoVert);
 	Pattern->SetUniformVariable("uS0", uS0);
-	Pattern->SetUniformVariable("uT0", uT0);
-	Pattern->SetUniformVariable("uDs", uDs);
-	Pattern->SetUniformVariable("uDt", uDt);
+	Pattern->SetUniformVariable("uT0", Time*uT0);
+	Pattern->SetUniformVariable("uDs", Time*uDs);
+	Pattern->SetUniformVariable("uDt", Time*uDt);
 	Pattern->SetUniformVariable("uTime", Time);
 	Pattern->SetUniformVariable("uKa", 0.5f);
 	Pattern->SetUniformVariable("uKd", 0.5f);
