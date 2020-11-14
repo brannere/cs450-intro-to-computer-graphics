@@ -115,7 +115,7 @@ SetSpotLight(int ilight, float x, float y, float z, float xdir, float ydir, floa
 
 // title of these windows:
 
-const char* WINDOWTITLE = { "OpenGL / Project 4 - Lighting -- Erick Branner" };
+const char* WINDOWTITLE = { "OpenGL / Project 5 - Shaders -- Erick Branner" };
 const char* GLUITITLE = { "User Interface Window" };
 
 
