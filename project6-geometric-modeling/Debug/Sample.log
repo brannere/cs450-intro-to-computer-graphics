@@ -1,3 +1,12 @@
 ﻿  sample.cpp
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(273,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(279,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(280,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(290,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(295,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(297,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(307,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(312,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(313,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
   Sample.vcxproj -> C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\Debug\Sample.exe

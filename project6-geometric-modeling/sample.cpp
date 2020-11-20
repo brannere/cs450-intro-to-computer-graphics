@@ -24,7 +24,7 @@
 bool first_p = false;
 float BladeAngle = 0;
 bool Frozen;
-
+#define NUM_CURVES 10
 
 /******************/
 
@@ -247,6 +247,78 @@ float			Dot(float[3], float[3]);
 float			Unit(float[3], float[3]);
 
 
+
+/* More of Erick's stuff */
+
+struct Point
+{
+	float x0, y0, z0;       // initial coordinates
+	float x, y, z;        // animated coordinates
+};
+
+struct Curve
+{
+	float r, g, b;
+	Point* points;
+	int count;
+};
+
+Curve curves[NUM_CURVES];		// if you are creating a pattern of curves
+
+
+
+void
+RotateX(Point* p, float deg, float xc, float yc, float zc)
+{
+	float rad = deg * (M_PI / 180.f);         // radians
+	float x = p->x0 - xc;
+	float y = p->y0 - yc;
+	float z = p->z0 - zc;
+
+	float xp = x;
+	float yp = y * cos(rad) - z * sin(rad);
+	float zp = y * sin(rad) + z * cos(rad);
+
+	p->x = xp + xc;
+	p->y = yp + yc;
+	p->z = zp + zc;
+}
+
+void
+RotateY(Point* p, float deg, float xc, float yc, float zc)
+{
+	float rad = deg * (M_PI / 180.f);         // radians
+	float x = p->x0 - xc;
+	float y = p->y0 - yc;
+	float z = p->z0 - zc;
+
+	float xp = x * cos(rad) + z * sin(rad);
+	float yp = y;
+	float zp = -x * sin(rad) + z * cos(rad);
+
+	p->x = xp + xc;
+	p->y = yp + yc;
+	p->z = zp + zc;
+}
+
+void
+RotateZ(Point* p, float deg, float xc, float yc, float zc)
+{
+	float rad = deg * (M_PI / 180.f);         // radians
+	float x = p->x0 - xc;
+	float y = p->y0 - yc;
+	float z = p->z0 - zc;
+
+	float xp = x * cos(rad) - y * sin(rad);
+	float yp = x * sin(rad) + y * cos(rad);
+	float zp = z;
+
+	p->x = xp + xc;
+	p->y = yp + yc;
+	p->z = zp + zc;
+}
+
+
 // main program:
 
 int
@@ -386,14 +458,9 @@ Display()
 	// set the eye position, look-at position, and up-vector:
 
 	// third person
-	if (first_p == false) {
-		gluLookAt(0., 7., 5., 0., 2., 0., 0., 1., 0.);
-	}
 
-	// first person
-	if (first_p == true) {
-		gluLookAt(-0.4, 1.8, -4.9, 0., 0., -15., 0., 1., 0.);
-	}
+		gluLookAt(0., 7., 5., 0., 2., 0., 0., 1., 0.);
+
 
 
 	// rotate the scene:
@@ -424,6 +491,15 @@ Display()
 	{
 		glDisable(GL_FOG);
 	}
+
+
+	int numPoints = 5;
+	curves[0].points = new Point[numPoints];
+
+	curves[0].points[0].x0 = 0.;
+	curves[0].points[0].y0 = 0.;
+	curves[0].points[0].z0 = 0.;
+
 
 
 	// possibly draw the axes:
@@ -850,6 +926,7 @@ InitLists()
 	// 	glVertex3f(BLADE_LEN,BLADE_WIDTH,0);
 	// 	glVertex3f(0,0,0);
 	// 	glEnd();
+	// glPopMatrix();
 	// glPopMatrix();
 
 
