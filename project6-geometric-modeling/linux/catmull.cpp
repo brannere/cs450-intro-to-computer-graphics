@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
+#include <iostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -35,8 +35,34 @@ void makePoints(struct curve* c, int num_points){
 	
 	// new_curve = new curve; 
 	c->points = new point[num_points];
+	c->count = num_points;
 	return;
 }
+
+// do a cat mull for EACH point (x,y,z)
+float catmull(float p0, float p1, float p2, float p3, float t){
+	
+	float res = 0;
+
+	res = 0.5 * (2*p1 + t * ((-1*p0) + p2) + (t*t) * (2 * p0 - 5 * p1 + (4*p2) -p3 + (t*t*t)*((-1*p0)+ (3*p1) - (3*p2) + p3)));
+
+	return res;
+}
+
+void 
+genCurve(struct curve* c, float x, float y, float z, float r, float g, float b){
+	
+	float t = 1;
+	for(int i = 0 ; i < c->count-4; i++, t*0.5){
+		std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
+		std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
+		std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
+		std::cout << "\n";
+	}
+
+	return;
+}
+
 
 void
 RotateX(point* p, float deg, float xc, float yc, float zc)
@@ -93,7 +119,26 @@ RotateZ(point* p, float deg, float xc, float yc, float zc)
 
 int main(){
 
+	struct curve c; 
+	makePoints(&c, 5);
+	c.points[0].x0 = 0;
+	c.points[0].y0 = 0;
+	c.points[0].z0 = 0;
+	
+	c.points[1].x0 = 1;
+	c.points[1].y0 = 1;
+	c.points[1].z0 = 1;
+	
+	
+	c.points[2].x0 = 2;
+	c.points[2].y0 = 2;
+	c.points[2].z0 = 2;
 
+	c.points[3].x0 = 6;
+	c.points[3].y0 = 6;
+	c.points[3].z0 = 6;
+
+	genCurve(&c, 1,1,1, 1,1,1);
 
 	return 0;
 }
