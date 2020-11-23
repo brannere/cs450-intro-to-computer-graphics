@@ -35,6 +35,11 @@ void makePoints(struct curve* c, int num_points){
 	
 	// new_curve = new curve; 
 	c->points = new point[num_points];
+	for(int i = 0; i < num_points; i++){
+		c->points[i].x0 = -1; 
+		c->points[i].y0 = -1; 
+		c->points[i].z0 = -1; 
+	}
 	c->count = num_points;
 	return;
 }
@@ -61,16 +66,27 @@ void genCurve(struct curve* c, float r, float g, float b){
 			catmull(z0,z1,z2,z3,t)
 			//glvertex(x,y,z)
 	*/
-	for(int i = 0 ; i < c->count-4; i++){
+	for(int i = 0 ; i < c->count-3; i++){
 		glBegin(GL_LINE_STRIP);
 		for(float t = 0; t <= 1; t+=0.05){
-			std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
-			std::cout << catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t) << "\n";
-			std::cout << catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t) << "\n";
-			std::cout << "\n";
+			// std::cout << "i: " << i << "\n";
+			// std::cout <<"t: " << t << "\n";
+			// std::cout << "i+0:\t" << c->points[i].x0 << "\n";
+			// std::cout << "i+1:\t" << c->points[i+1].x0 << "\n";
+			// std::cout << "i+2:\t" << c->points[i+2].x0 << "\n";
+			// std::cout << "i+3:\t" << c->points[i+3].x0 << "\n";
+			// std::cout << "[" << i << "].y0: " << c->points[i].y0 << "\n";
+			// std::cout << "[" << i << "].z0: " << c->points[i].z0 << "\n\n";
+			// // std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
+			// std::cout << catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t) << "\n";
+			// std::cout << catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t) << "\n";
+			// std::cout << "\n";
 			x =catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t);
 			y =catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t);
 			z =catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t);
+			
+
+			std::cout << "x: " << x <<"\ny: " << y << "\nz: "<< z << "\n\n";
 			glVertex3f(x,y,z);
 		}
 		glEnd();
