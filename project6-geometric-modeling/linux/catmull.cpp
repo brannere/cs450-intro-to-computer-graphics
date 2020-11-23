@@ -50,14 +50,25 @@ float catmull(float p0, float p1, float p2, float p3, float t){
 }
 
 void 
-genCurve(struct curve* c, float x, float y, float z, float r, float g, float b){
+genCurve(struct curve* c, float r, float g, float b){
 	
-	float t = 1;
-	for(int i = 0 ; i < c->count-4; i++, t*0.5){
-		std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
-		std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
-		std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
-		std::cout << "\n";
+
+	/* 
+	for group:
+		glbegin()
+		for t in some increment: t += 0.5
+			catmull(x0,x1,x2,x3,t)
+			catmull(y0,y1,y2,y3,t)
+			catmull(z0,z1,z2,z3,t)
+			//glvertex(x,y,z)
+	*/
+	for(int i = 0 ; i < c->count-4; i++){
+		for(float t = 0; t <= 1; t+=0.05){
+			std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
+			std::cout << catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t) << "\n";
+			std::cout << catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t) << "\n";
+			std::cout << "\n";
+		}
 	}
 
 	return;
@@ -138,7 +149,13 @@ int main(){
 	c.points[3].y0 = 6;
 	c.points[3].z0 = 6;
 
-	genCurve(&c, 1,1,1, 1,1,1);
+	
+	// for each point
+		//catmull x
+		//catmull y 
+		//catmull z
+
+	genCurve(&c, 1,1,1);
 
 	return 0;
 }
