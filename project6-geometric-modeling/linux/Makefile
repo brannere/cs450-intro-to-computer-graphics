@@ -1,2 +1,2 @@
-sample:		sample.cpp
-		g++ -o run sample.cpp  -lglut -lGL  -lGLU
+sample:	sample.cpp
+		g++ -g -o run sample.cpp -lglut -lGL  -lGLU

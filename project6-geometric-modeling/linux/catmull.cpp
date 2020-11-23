@@ -20,7 +20,6 @@ struct curve
 	point* points;
 	int count;
 };
-void makePoints(struct curve* c, int num_points);
 
 // Curve curves[NUM_CURVES];		// if you are creating a pattern of curves
 
@@ -50,9 +49,8 @@ float catmull(float p0, float p1, float p2, float p3, float t){
 	return res;
 }
 
-void 
-genCurve(struct curve* c, float r, float g, float b){
-	
+void genCurve(struct curve* c, float r, float g, float b){
+	float x,y,z;
 
 	/* 
 	for group:
@@ -64,12 +62,18 @@ genCurve(struct curve* c, float r, float g, float b){
 			//glvertex(x,y,z)
 	*/
 	for(int i = 0 ; i < c->count-4; i++){
+		glBegin(GL_LINE_STRIP);
 		for(float t = 0; t <= 1; t+=0.05){
 			std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
 			std::cout << catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t) << "\n";
 			std::cout << catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t) << "\n";
-			std::cout << "\n";
+			// std::cout << "\n";
+			x =catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t);
+			y =catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t);
+			z =catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t);
+			glVertex3f(x,y,z);
 		}
+		glEnd();
 	}
 
 	return;
