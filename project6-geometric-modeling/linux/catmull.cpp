@@ -51,7 +51,7 @@ float catmull(float p0, float p1, float p2, float p3, float t){
 
 void genCurve(struct curve* c, float r, float g, float b){
 	float x,y,z;
-
+	glColor3f(r,g,b);
 	/* 
 	for group:
 		glbegin()
@@ -67,7 +67,7 @@ void genCurve(struct curve* c, float r, float g, float b){
 			std::cout << catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t) << "\n";
 			std::cout << catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t) << "\n";
 			std::cout << catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t) << "\n";
-			// std::cout << "\n";
+			std::cout << "\n";
 			x =catmull(c->points[i].x0, c->points[i+1].x0, c->points[i+2].x0, c->points[i+3].x0,t);
 			y =catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t);
 			z =catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t);
