@@ -20,6 +20,7 @@ struct curve
 	point* points;
 	int count;
 };
+void makePoints(struct curve* c, int num_points);
 
 // Curve curves[NUM_CURVES];		// if you are creating a pattern of curves
 
@@ -75,87 +76,87 @@ genCurve(struct curve* c, float r, float g, float b){
 }
 
 
-void
-RotateX(point* p, float deg, float xc, float yc, float zc)
-{
-	float rad = deg * (M_PI / 180.f);         // radians
-	float x = p->x0 - xc;
-	float y = p->y0 - yc;
-	float z = p->z0 - zc;
+// void
+// RotateX(point* p, float deg, float xc, float yc, float zc)
+// {
+// 	float rad = deg * (M_PI / 180.f);         // radians
+// 	float x = p->x0 - xc;
+// 	float y = p->y0 - yc;
+// 	float z = p->z0 - zc;
 
-	float xp = x;
-	float yp = y * cos(rad) - z * sin(rad);
-	float zp = y * sin(rad) + z * cos(rad);
+// 	float xp = x;
+// 	float yp = y * cos(rad) - z * sin(rad);
+// 	float zp = y * sin(rad) + z * cos(rad);
 
-	p->x = xp + xc;
-	p->y = yp + yc;
-	p->z = zp + zc;
-}
+// 	p->x = xp + xc;
+// 	p->y = yp + yc;
+// 	p->z = zp + zc;
+// }
 
-void
-RotateY(point* p, float deg, float xc, float yc, float zc)
-{
-	float rad = deg * (M_PI / 180.f);         // radians
-	float x = p->x0 - xc;
-	float y = p->y0 - yc;
-	float z = p->z0 - zc;
+// void
+// RotateY(point* p, float deg, float xc, float yc, float zc)
+// {
+// 	float rad = deg * (M_PI / 180.f);         // radians
+// 	float x = p->x0 - xc;
+// 	float y = p->y0 - yc;
+// 	float z = p->z0 - zc;
 
-	float xp = x * cos(rad) + z * sin(rad);
-	float yp = y;
-	float zp = -x * sin(rad) + z * cos(rad);
+// 	float xp = x * cos(rad) + z * sin(rad);
+// 	float yp = y;
+// 	float zp = -x * sin(rad) + z * cos(rad);
 
-	p->x = xp + xc;
-	p->y = yp + yc;
-	p->z = zp + zc;
-}
+// 	p->x = xp + xc;
+// 	p->y = yp + yc;
+// 	p->z = zp + zc;
+// }
 
-void
-RotateZ(point* p, float deg, float xc, float yc, float zc)
-{
-	float rad = deg * (M_PI / 180.f);         // radians
-	float x = p->x0 - xc;
-	float y = p->y0 - yc;
-	float z = p->z0 - zc;
+// void
+// RotateZ(point* p, float deg, float xc, float yc, float zc)
+// {
+// 	float rad = deg * (M_PI / 180.f);         // radians
+// 	float x = p->x0 - xc;
+// 	float y = p->y0 - yc;
+// 	float z = p->z0 - zc;
 
-	float xp = x * cos(rad) - y * sin(rad);
-	float yp = x * sin(rad) + y * cos(rad);
-	float zp = z;
+// 	float xp = x * cos(rad) - y * sin(rad);
+// 	float yp = x * sin(rad) + y * cos(rad);
+// 	float zp = z;
 
-	p->x = xp + xc;
-	p->y = yp + yc;
-	p->z = zp + zc;
-}
+// 	p->x = xp + xc;
+// 	p->y = yp + yc;
+// 	p->z = zp + zc;
+// }
 
 
 
-int main(){
+// int main(){
 
-	struct curve c; 
-	makePoints(&c, 5);
-	c.points[0].x0 = 0;
-	c.points[0].y0 = 0;
-	c.points[0].z0 = 0;
+// 	struct curve c; 
+// 	makePoints(&c, 5);
+// 	c.points[0].x0 = 0;
+// 	c.points[0].y0 = 0;
+// 	c.points[0].z0 = 0;
 	
-	c.points[1].x0 = 1;
-	c.points[1].y0 = 1;
-	c.points[1].z0 = 1;
+// 	c.points[1].x0 = 1;
+// 	c.points[1].y0 = 1;
+// 	c.points[1].z0 = 1;
 	
 	
-	c.points[2].x0 = 2;
-	c.points[2].y0 = 2;
-	c.points[2].z0 = 2;
+// 	c.points[2].x0 = 2;
+// 	c.points[2].y0 = 2;
+// 	c.points[2].z0 = 2;
 
-	c.points[3].x0 = 6;
-	c.points[3].y0 = 6;
-	c.points[3].z0 = 6;
+// 	c.points[3].x0 = 6;
+// 	c.points[3].y0 = 6;
+// 	c.points[3].z0 = 6;
 
 	
-	// for each point
-		//catmull x
-		//catmull y 
-		//catmull z
+// 	// for each point
+// 		//catmull x
+// 		//catmull y 
+// 		//catmull z
 
-	genCurve(&c, 1,1,1);
+// 	genCurve(&c, 1,1,1);
 
-	return 0;
-}
+// 	return 0;
+// }
