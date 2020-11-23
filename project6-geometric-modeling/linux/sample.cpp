@@ -580,7 +580,8 @@ Display()
 	curves[0].points[0].y0 = 0;
 	curves[0].points[0].z0 = 0;
 	
-	curves[0].points[1].x0 = 2;
+
+	curves[0].points[1].x0 = 0.5;
 	curves[0].points[1].y0 = 1;
 	curves[0].points[1].z0 = 0;
 	
@@ -596,6 +597,16 @@ Display()
 	curves[0].points[4].y0 = 0;
 	curves[0].points[4].z0 = 0;
 
+	glPointSize(5);
+	glBegin(GL_POINTS);
+	for(int i = 0; i < 5; i++){
+		glVertex3f(curves[0].points[i].x0,curves[0].points[i].y0,curves[0].points[i].z0);
+	}
+	// glVertex3f(0.5,1,0);
+	// glVertex3f(6,2,0);
+	// glVertex3f(7,1,0);
+	// glVertex3f(11,0,0);
+	glEnd();
 
 	// curves[1].points[1].x0 = 1;
 	// curves[1].points[1].y0 = 1;
