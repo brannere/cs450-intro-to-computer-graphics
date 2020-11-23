@@ -1,12 +1,6 @@
 ﻿  sample.cpp
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(273,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(279,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(280,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(290,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(295,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(297,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(307,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(312,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\sample.cpp(313,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-sample.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  Sample.vcxproj -> C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\Debug\Sample.exe
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\windows\catmull.cpp(48,12): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\windows\catmull.cpp(67,35): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\windows\sample.cpp(123,23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\windows\sample.cpp(123,1): error C2365: 'doPoints': redefinition; previous definition was 'function'
+C:\Users\Erick Branner\Documents\osu\cs450-intro-to-computer-graphics\project6-geometric-modeling\windows\catmull.cpp(29): message : see declaration of 'doPoints'
