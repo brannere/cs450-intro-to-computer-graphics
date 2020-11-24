@@ -585,11 +585,17 @@ Display()
 	float init_y11 = 0;
 	float init_z11 = 0;
 
-	float init_x21 = -0.25;
+	// float init_x21 = 0;
+	// float init_y21 = 0;
+	// float init_z21 = 0;
+
+	// float init_x21 = -0.25;
+	float init_x21 = 0;
 	float init_y21 = 0.25;
 	float init_z21 = 0;
 
-	float init_x31 = -0.75;
+	// float init_x31 = -0.75;
+	float init_x31 = 0;
 	float init_y31 = 0.5;
 	float init_z31 = 0;
 
@@ -599,26 +605,25 @@ Display()
 	
 
 
-
 	for(int i = 0; i < NUM_CURVES; i++){
 		makePoints(&curves[i], NUM_POINTS);
 		// for(int j = 0; j < NUM_POINTS; j++){
 		curves[i].points[0].x0 = init_x01;// + i;
 		curves[i].points[0].x0 = init_y01;// + i;
-		curves[i].points[0].x0 = init_z01;// + i;
+		curves[i].points[0].x0 = init_z01+Time;// + i;
 			// }
 		curves[i].points[1].x0 = init_x11+i-0.1;
 		curves[i].points[1].y0 = init_y11;//+i;
 		curves[i].points[1].z0 = init_z11;//+i;
 		curves[i].points[2].x0 = init_x21;//+i;
 		curves[i].points[2].y0 = init_y21+i-0.1;
-		curves[i].points[2].z0 = init_z21;//+i;
+		curves[i].points[2].z0 = init_z21+sin(Time);//+i;
 		curves[i].points[3].x0 = init_x31;//+i;
 		curves[i].points[3].y0 = init_y31+i-0.1;
-		curves[i].points[3].z0 = init_z31;//+i;
+		curves[i].points[3].z0 = init_z31-sin(Time);//+i;
 		curves[i].points[4].x0 = init_x41;//+i;
 		curves[i].points[4].y0 = init_y41;//+i;
-		curves[i].points[4].z0 = init_z41;//+i;
+		curves[i].points[4].z0 = init_z41-Time;//+i;
 		genCurve(&curves[i], 0,1,0);
 
 	}
