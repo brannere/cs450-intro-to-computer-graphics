@@ -610,20 +610,20 @@ Display()
 		// for(int j = 0; j < NUM_POINTS; j++){
 		curves[i].points[0].x0 = init_x01;// + i;
 		curves[i].points[0].x0 = init_y01;// + i;
-		curves[i].points[0].x0 = init_z01+Time;// + i;
+		curves[i].points[0].x0 = init_z01+1*sin(2.*M_PI*Time);//+(Time);// + i;
 			// }
 		curves[i].points[1].x0 = init_x11+i-0.1;
 		curves[i].points[1].y0 = init_y11;//+i;
 		curves[i].points[1].z0 = init_z11;//+i;
 		curves[i].points[2].x0 = init_x21;//+i;
 		curves[i].points[2].y0 = init_y21+i-0.1;
-		curves[i].points[2].z0 = init_z21+sin(Time);//+i;
+		curves[i].points[2].z0 = init_z21+1*sin(2.*M_PI*Time);//+i;
 		curves[i].points[3].x0 = init_x31;//+i;
 		curves[i].points[3].y0 = init_y31+i-0.1;
-		curves[i].points[3].z0 = init_z31-sin(Time);//+i;
+		curves[i].points[3].z0 = init_z31-1*sin(2.*M_PI*Time);//+i;
 		curves[i].points[4].x0 = init_x41;//+i;
 		curves[i].points[4].y0 = init_y41;//+i;
-		curves[i].points[4].z0 = init_z41-Time;//+i;
+		curves[i].points[4].z0 = init_z41-1*sin(2.*M_PI*Time);//+i;
 		genCurve(&curves[i], 0,1,0);
 
 	}
