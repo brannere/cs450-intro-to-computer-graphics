@@ -87,8 +87,8 @@ void genCurve(struct curve* c, float r, float g, float b){
 			y =catmull(c->points[i].y0, c->points[i+1].y0, c->points[i+2].y0, c->points[i+3].y0,t);
 			z =catmull(c->points[i].z0, c->points[i+1].z0, c->points[i+2].z0, c->points[i+3].z0,t);
 			
+			// std::cout << "x: " << x <<"\ny: " << y << "\nz: "<< z << "\n\n";
 
-			std::cout << "x: " << x <<"\ny: " << y << "\nz: "<< z << "\n\n";
 			glVertex3f(x,y,z);
 		}
 		glEnd();

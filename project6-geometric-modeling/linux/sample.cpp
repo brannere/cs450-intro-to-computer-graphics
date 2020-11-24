@@ -577,8 +577,8 @@ Display()
 	// makePoints(&curves[4], 5);
 	// std::cout << &curves[0] << "\n";
 	
-	float init_x01 = 0;
-	float init_y01 = -1;
+	float init_x01 = 0.5;
+	float init_y01 = -0.5;
 	float init_z01 = 0;
 	
 	float init_x11 = 0;
@@ -593,8 +593,8 @@ Display()
 	float init_y31 = 0.5;
 	float init_z31 = 0;
 
-	float init_x41 = 0;
-	float init_y41 = -1;
+	float init_x41 = 0.5;
+	float init_y41 = -0.5;
 	float init_z41 = 0;
 	
 
@@ -603,25 +603,26 @@ Display()
 	for(int i = 0; i < NUM_CURVES; i++){
 		makePoints(&curves[i], NUM_POINTS);
 		// for(int j = 0; j < NUM_POINTS; j++){
-		curves[i].points[0].x0 = init_x01 + i;
-		curves[i].points[0].x0 = init_y01 + i;
+		curves[i].points[0].x0 = init_x01;// + i;
+		curves[i].points[0].x0 = init_y01;// + i;
 		curves[i].points[0].x0 = init_z01;// + i;
 			// }
-		curves[i].points[1].x0 = init_x11+i;
-		curves[i].points[1].y0 = init_y11+i;
+		curves[i].points[1].x0 = init_x11+i-0.1;
+		curves[i].points[1].y0 = init_y11;//+i;
 		curves[i].points[1].z0 = init_z11;//+i;
-		curves[i].points[2].x0 = init_x21+i;
-		curves[i].points[2].y0 = init_y21+i;
+		curves[i].points[2].x0 = init_x21;//+i;
+		curves[i].points[2].y0 = init_y21+i-0.1;
 		curves[i].points[2].z0 = init_z21;//+i;
-		curves[i].points[3].x0 = init_x31+i;
-		curves[i].points[3].y0 = init_y31+i;
+		curves[i].points[3].x0 = init_x31;//+i;
+		curves[i].points[3].y0 = init_y31+i-0.1;
 		curves[i].points[3].z0 = init_z31;//+i;
-		curves[i].points[4].x0 = init_x41+i;
-		curves[i].points[4].y0 = init_y41+i;
+		curves[i].points[4].x0 = init_x41;//+i;
+		curves[i].points[4].y0 = init_y41;//+i;
 		curves[i].points[4].z0 = init_z41;//+i;
 		genCurve(&curves[i], 0,1,0);
 
 	}
+	glEnd();
 
 	// curves[0].points[0].x0 = init_x01;
 	// curves[0].points[0].y0 = init_y01;
@@ -645,8 +646,11 @@ Display()
 
 	glPointSize(5);
 	glBegin(GL_POINTS);
-	for(int i = 0; i < 5; i++){
-		glVertex3f(curves[0].points[i].x0,curves[0].points[i].y0,curves[0].points[i].z0);
+	glColor3f(1,1,1);
+	for(int i = 0; i < NUM_CURVES; i++){
+		for(int j = 0; j < NUM_POINTS; j++){
+			glVertex3f(curves[i].points[j].x0,curves[i].points[j].y0,curves[i].points[j].z0);
+		}
 	}
 	// glVertex3f(0.5,1,0);
 	// glVertex3f(6,2,0);
