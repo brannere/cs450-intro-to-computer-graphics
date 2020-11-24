@@ -582,18 +582,18 @@ Display()
 	
 
 	curves[0].points[1].x0 = 0.5;
-	curves[0].points[1].y0 = 1;
+	curves[0].points[1].y0 = 0;
 	curves[0].points[1].z0 = 0;
 	
-	curves[0].points[2].x0 = 6;
-	curves[0].points[2].y0 = 2;
+	curves[0].points[2].x0 = 1;
+	curves[0].points[2].y0 = 0.5;
 	curves[0].points[2].z0 = 0;
 	
-	curves[0].points[3].x0 = 7;
-	curves[0].points[3].y0 = 1;
+	curves[0].points[3].x0 = 2;
+	curves[0].points[3].y0 = 0.5;
 	curves[0].points[3].z0 = 0;
 
-	curves[0].points[4].x0 = 11;
+	curves[0].points[4].x0 = 0;
 	curves[0].points[4].y0 = 0;
 	curves[0].points[4].z0 = 0;
 

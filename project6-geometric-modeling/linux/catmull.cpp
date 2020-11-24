@@ -49,7 +49,9 @@ float catmull(float p0, float p1, float p2, float p3, float t){
 	
 	float res = 0;
 
-	res = 0.5 * (2*p1 + t * ((-1*p0) + p2) + (t*t) * (2 * p0 - 5 * p1 + (4*p2) -p3 + (t*t*t)*((-1*p0)+ (3*p1) - (3*p2) + p3)));
+	res = 0.5 * ((2*p1 + t * ((-1*p0) + p2) ) + 
+							((t*t) * ( (2 * p0) - (5 * p1) + (4*p2) -p3 + 
+							( (t*t*t) *( (-1*p0)+ (3*p1) - (3*p2) + p3) ) ) ) ) ;
 
 	return res;
 }
@@ -66,7 +68,7 @@ void genCurve(struct curve* c, float r, float g, float b){
 			catmull(z0,z1,z2,z3,t)
 			//glvertex(x,y,z)
 	*/
-	for(int i = 0 ; i < c->count-3; i++){
+	for(int i = 0 ; i < c->count-4; i++){
 		glBegin(GL_LINE_STRIP);
 		for(float t = 0; t <= 1; t+=0.05){
 			// std::cout << "i: " << i << "\n";
