@@ -55,7 +55,7 @@ float catmull(float p0, float p1, float p2, float p3, float t){
 
 	return res;
 }
-
+// call this for each curve
 void genCurve(struct curve* c, float r, float g, float b){
 	float x,y,z;
 	glColor3f(r,g,b);

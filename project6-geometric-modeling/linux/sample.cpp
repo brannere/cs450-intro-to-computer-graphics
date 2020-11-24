@@ -25,7 +25,7 @@ bool first_p = false;
 float BladeAngle = 0;
 bool Frozen;
 #define NUM_CURVES 10
-
+#define NUM_POINTS 5
 
 
 
@@ -570,32 +570,78 @@ Display()
 		glDisable(GL_FOG);
 	}
 
-	makePoints(&curves[0], 5);
+	
 	// makePoints(&curves[1], 5);
 	// makePoints(&curves[2], 5);
 	// makePoints(&curves[3], 5);
 	// makePoints(&curves[4], 5);
 	// std::cout << &curves[0] << "\n";
-	curves[0].points[0].x0 = 0;
-	curves[0].points[0].y0 = 0;
-	curves[0].points[0].z0 = 0;
+	
+	float init_x01 = 0;
+	float init_y01 = -1;
+	float init_z01 = 0;
+	
+	float init_x11 = 0;
+	float init_y11 = 0;
+	float init_z11 = 0;
+
+	float init_x21 = -0.25;
+	float init_y21 = 0.25;
+	float init_z21 = 0;
+
+	float init_x31 = -0.75;
+	float init_y31 = 0.5;
+	float init_z31 = 0;
+
+	float init_x41 = 0;
+	float init_y41 = -1;
+	float init_z41 = 0;
 	
 
-	curves[0].points[1].x0 = 0.5;
-	curves[0].points[1].y0 = 0;
-	curves[0].points[1].z0 = 0;
-	
-	curves[0].points[2].x0 = 1;
-	curves[0].points[2].y0 = 0.5;
-	curves[0].points[2].z0 = 0;
-	
-	curves[0].points[3].x0 = 2;
-	curves[0].points[3].y0 = 0.5;
-	curves[0].points[3].z0 = 0;
 
-	curves[0].points[4].x0 = 0;
-	curves[0].points[4].y0 = 0;
-	curves[0].points[4].z0 = 0;
+
+	for(int i = 0; i < NUM_CURVES; i++){
+		makePoints(&curves[i], NUM_POINTS);
+		// for(int j = 0; j < NUM_POINTS; j++){
+		curves[i].points[0].x0 = init_x01 + i;
+		curves[i].points[0].x0 = init_y01 + i;
+		curves[i].points[0].x0 = init_z01;// + i;
+			// }
+		curves[i].points[1].x0 = init_x11+i;
+		curves[i].points[1].y0 = init_y11+i;
+		curves[i].points[1].z0 = init_z11;//+i;
+		curves[i].points[2].x0 = init_x21+i;
+		curves[i].points[2].y0 = init_y21+i;
+		curves[i].points[2].z0 = init_z21;//+i;
+		curves[i].points[3].x0 = init_x31+i;
+		curves[i].points[3].y0 = init_y31+i;
+		curves[i].points[3].z0 = init_z31;//+i;
+		curves[i].points[4].x0 = init_x41+i;
+		curves[i].points[4].y0 = init_y41+i;
+		curves[i].points[4].z0 = init_z41;//+i;
+		genCurve(&curves[i], 0,1,0);
+
+	}
+
+	// curves[0].points[0].x0 = init_x01;
+	// curves[0].points[0].y0 = init_y01;
+	// curves[0].points[0].z0 = init_z01;
+	
+	// curves[0].points[1].x0 = init_x11;
+	// curves[0].points[1].y0 = init_y11;
+	// curves[0].points[1].z0 = init_z11;
+	
+	// curves[0].points[2].x0 = init_x21;
+	// curves[0].points[2].y0 = init_y21;
+	// curves[0].points[2].z0 = init_z21;
+	
+	// curves[0].points[3].x0 = init_x31;
+	// curves[0].points[3].y0 = init_y31;
+	// curves[0].points[3].z0 = init_z31;
+
+	// curves[0].points[4].x0 = init_x41;
+	// curves[0].points[4].y0 = init_y41;
+	// curves[0].points[4].z0 = init_z41;
 
 	glPointSize(5);
 	glBegin(GL_POINTS);
@@ -624,7 +670,6 @@ Display()
 	// curves[4].points[4].y0 = 9;
 	// curves[4].points[4].z0 = 0;
 
-	genCurve(curves, 0,1,0);
 
 	// int numPoints = 5;
 	// curves[0].points = new point[numPoints];
@@ -1031,7 +1076,7 @@ InitGraphics()
 // (a display list is a way to store opengl commands in
 //  memory so that they can be played back efficiently at a later time
 //  with a call to glCallList( )
-int num_points = 1000;
+// int num_points = 1000;
 
 void
 InitLists()
