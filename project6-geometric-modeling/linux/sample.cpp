@@ -26,7 +26,7 @@ float BladeAngle = 0;
 bool Frozen;
 #define NUM_CURVES 10
 #define NUM_POINTS 5
-
+bool DO_POINT = true; 
 
 
 /* More of Erick's stuff */
@@ -122,7 +122,7 @@ struct curve curves[NUM_CURVES];
 //		6. The transformations to be reset
 //		7. The program to quit
 //
-//	Author:			Joe Graphics
+//	Author:			Erick Branner
 
 // NOTE: There are a lot of good reasons to use const variables instead
 // of #define's.  However, Visual C++ does not allow a const variable
@@ -132,7 +132,7 @@ struct curve curves[NUM_CURVES];
 
 // title of these windows:
 
-const char* WINDOWTITLE = { "OpenGL / GLUT Sample -- Joe Graphics" };
+const char* WINDOWTITLE = { "OpenGL / Project 6 - Geometric Modeling -- Erick Branner" };
 const char* GLUITITLE = { "User Interface Window" };
 
 // what the glui package defines as true and false:
@@ -649,12 +649,15 @@ Display()
 	// curves[0].points[4].y0 = init_y41;
 	// curves[0].points[4].z0 = init_z41;
 
-	glPointSize(5);
-	glBegin(GL_POINTS);
-	glColor3f(1,1,1);
-	for(int i = 0; i < NUM_CURVES; i++){
-		for(int j = 0; j < NUM_POINTS; j++){
-			glVertex3f(curves[i].points[j].x0,curves[i].points[j].y0,curves[i].points[j].z0);
+
+	if(DO_POINT == true){
+		glPointSize(5);
+		glBegin(GL_POINTS);
+		glColor3f(1,1,1);
+		for(int i = 0; i < NUM_CURVES; i++){
+			for(int j = 0; j < NUM_POINTS; j++){
+				glVertex3f(curves[i].points[j].x0,curves[i].points[j].y0,curves[i].points[j].z0);
+			}
 		}
 	}
 	// glVertex3f(0.5,1,0);
@@ -744,7 +747,7 @@ Display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glColor3f(1., 1., 1.);
-	// DoRasterString( 5., 5., 0., (char *)"Text That Doesn't" );
+	DoRasterString( 5., 5., 0., (char *)"WI-FI" );
 
 
 	// swap the double-buffered framebuffers:
@@ -1222,6 +1225,10 @@ Keyboard(unsigned char c, int x, int y)
 			glutIdleFunc(Animate);
 		break;
 
+
+	case '1':
+		DO_POINT = !DO_POINT;
+		break;
 	default:
 		fprintf(stderr, "Don't know what to do with keyboard hit: '%c' (0x%0x)\n", c, c);
 	}
