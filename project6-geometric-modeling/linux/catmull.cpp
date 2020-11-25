@@ -70,7 +70,7 @@ void genCurve(struct curve* c, float r, float g, float b){
 	*/
 	for(int i = 0 ; i < c->count-4; i++){
 		glBegin(GL_LINE_STRIP);
-		for(float t = 0; t <= 1; t+=0.05){
+		for(float t = 0; t <= 1.04; t+=0.05){
 			// std::cout << "i: " << i << "\n";
 			// std::cout <<"t: " << t << "\n";
 			// std::cout << "i+0:\t" << c->points[i].x0 << "\n";

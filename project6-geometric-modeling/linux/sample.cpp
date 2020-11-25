@@ -623,7 +623,12 @@ Display()
 		curves[i].points[4].y0 = init_y41;//+i;
 		curves[i].points[4].z0 = init_z41-1*sin(2.*M_PI*Time);//+i;
 		if(DO_CURVE == true){
-			genCurve(&curves[i], 0,1,0);
+			if(i%2 == 0){
+				genCurve(&curves[i], 0.5,1,0);
+			}
+			else{
+				genCurve(&curves[i], 0,1,1);
+			}
 		}
 
 		}
