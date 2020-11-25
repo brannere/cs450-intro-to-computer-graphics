@@ -27,7 +27,7 @@ bool Frozen;
 #define NUM_CURVES 10
 #define NUM_POINTS 5
 bool DO_POINT = true; 
-
+bool DO_CURVE = true; 
 
 /* More of Erick's stuff */
 // #include "./catmull.cpp"
@@ -603,8 +603,6 @@ Display()
 	float init_y41 = -0.5;
 	float init_z41 = 0;
 	
-
-
 	for(int i = 0; i < NUM_CURVES; i++){
 		makePoints(&curves[i], NUM_POINTS);
 		// for(int j = 0; j < NUM_POINTS; j++){
@@ -624,9 +622,11 @@ Display()
 		curves[i].points[4].x0 = init_x41;//+i;
 		curves[i].points[4].y0 = init_y41;//+i;
 		curves[i].points[4].z0 = init_z41-1*sin(2.*M_PI*Time);//+i;
-		genCurve(&curves[i], 0,1,0);
+		if(DO_CURVE == true){
+			genCurve(&curves[i], 0,1,0);
+		}
 
-	}
+		}
 	glEnd();
 
 	// curves[0].points[0].x0 = init_x01;
@@ -1228,6 +1228,11 @@ Keyboard(unsigned char c, int x, int y)
 
 	case '1':
 		DO_POINT = !DO_POINT;
+		break;
+
+	case 'c':
+	case 'C':
+		DO_CURVE = !DO_CURVE;
 		break;
 	default:
 		fprintf(stderr, "Don't know what to do with keyboard hit: '%c' (0x%0x)\n", c, c);
