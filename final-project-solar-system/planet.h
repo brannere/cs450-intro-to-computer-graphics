@@ -17,7 +17,9 @@ class Planet{
 		//int orbital_velocity; // km/s
 
 	public:
-		// Planet();
+		Planet();
+		Planet(	string name, double diameter, double rotation_period, double day_len, 
+						double dist_from_sun, double orbital_period );
 		// ~Planet();
 
 };
