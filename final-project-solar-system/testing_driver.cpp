@@ -7,7 +7,8 @@ using std::cout;
 
 int main(){
 
-	Planet p("asdf",1,2,3,4,5);
+	Planet mercury("mercury",4879,1407.6,4222.6,57.9,88);
+	// Planet venus("venus",4879,1407.6,4222.6,57.9,88);
 
 	return 0;
 }
