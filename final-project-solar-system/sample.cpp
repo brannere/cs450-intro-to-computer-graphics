@@ -20,6 +20,8 @@
 const int SCROLL_WHEEL_UP   = { 3 };
 const int SCROLL_WHEEL_DOWN = { 4 };
 const double RADIUS_SCALER = 500;
+const int SUN_DIAM = 160000;
+const int SUN_DIAM_DENOM = 15000;
 // equivalent mouse movement when we click a the scroll wheel:
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
@@ -41,6 +43,9 @@ Planet jupiter("jupiter",	142984,	9.9,			9.9,		778.6,	4331	,0.01);
 Planet saturn	("saturn",	120536,	10.7,			10.7,		1433.5,	10747	,0.01);
 Planet uranus	("uranus",	51118,	-17.2,		17.2,		2872.5,	30589	,0.01);
 Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	59800	,0.01);
+
+/* This isn't the the real diameter of the sun... */
+Planet sun		("sun",			SUN_DIAM,	0,			0, 			0, 			0			,0.01);
 
 
 //	This is a sample OpenGL / GLUT program
@@ -615,22 +620,34 @@ Display( )
 	// MjbSphere(1,100,100);
 	// glDisable( GL_TEXTURE_2D );
 
-	drawCircle(mercury.dist_from_sun, 1,1,1);
-	drawCircle(venus.dist_from_sun, 	1,1,1);
-	drawCircle(earth.dist_from_sun, 	1,1,1);
-	drawCircle(mars.dist_from_sun, 		1,1,1);
-	drawCircle(jupiter.dist_from_sun, 1,1,1);
-	drawCircle(saturn.dist_from_sun, 	1,1,1);
-	drawCircle(uranus.dist_from_sun, 	1,1,1);
-	drawCircle(neptune.dist_from_sun, 1,1,1);
+	drawCircle(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(venus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(earth.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(mars.dist_from_sun		+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(saturn.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(uranus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	drawCircle(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
 
-	
+
+	/* A Sun */
+	// glEnable(GL_TEXTURE_2D);
+	// glBindTexture( GL_TEXTURE_2D, tex_mercury );
+	glPushMatrix();
+		glColor3f( 1., 1., 0. );
+		// glTranslatef(mercury.dist_from_sun,0,0);
+		MjbSphere((sun.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	// glDisable( GL_TEXTURE_2D );
+	/*******/
+
+
 	/* A Mercury */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_mercury );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(mercury.dist_from_sun,0,0);
+		glTranslatef(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((mercury.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -641,7 +658,7 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_venus );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(venus.dist_from_sun,0,0);
+		glTranslatef(venus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((venus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -652,7 +669,7 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_mars );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(mars.dist_from_sun,0,0);
+		glTranslatef(mars.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((mars.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -663,7 +680,7 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_jupiter );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(jupiter.dist_from_sun,0,0);
+		glTranslatef(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -674,7 +691,7 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_saturn );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(saturn.dist_from_sun,0,0);
+		glTranslatef(saturn.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((saturn.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -685,7 +702,7 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_uranus );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(uranus.dist_from_sun,0,0);
+		glTranslatef(uranus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((uranus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -696,7 +713,7 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_neptune );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(neptune.dist_from_sun,0,0);
+		glTranslatef(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
 		MjbSphere((neptune.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
