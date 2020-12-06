@@ -608,12 +608,12 @@ Display( )
 	// draw the current object:
 
 	glCallList( BoxList );
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture( GL_TEXTURE_2D, tex_mars );
-	glColor3f( 0., 1., 0. );
+	// glEnable(GL_TEXTURE_2D);
+	// glBindTexture( GL_TEXTURE_2D, tex_mars );
+	// glColor3f( 0., 1., 0. );
 	
-	MjbSphere(1,100,100);
-	glDisable( GL_TEXTURE_2D );
+	// MjbSphere(1,100,100);
+	// glDisable( GL_TEXTURE_2D );
 
 	drawCircle(mercury.dist_from_sun, 1,1,1);
 	drawCircle(venus.dist_from_sun, 	1,1,1);
@@ -625,14 +625,40 @@ Display( )
 
 	/* A Planet */
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture( GL_TEXTURE_2D, tex_jupiter );
+	glBindTexture( GL_TEXTURE_2D, tex_mercury );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(4,0,0);
+		glTranslatef(mercury.dist_from_sun,0,0);
 		MjbSphere(1,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 	/*******/
+	
+	/* A Planet */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_venus );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(venus.dist_from_sun,0,0);
+		MjbSphere(1,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
+	/* A Planet */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_mars );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(mars.dist_from_sun,0,0);
+		MjbSphere(1,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
+	
+	
+	
 	glEnd( );
 	
 	
