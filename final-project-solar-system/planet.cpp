@@ -13,7 +13,7 @@ Planet::Planet(){
 
 Planet::Planet(	string name, double diameter, double rotation_period, 
 								double day_len, double dist_from_sun, double orbital_period,
-								int scaler)
+								double scaler)
 {
 	this->scaler 					= scaler;
 	this->name 						= name;

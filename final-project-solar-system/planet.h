@@ -18,10 +18,10 @@ class Planet{
 		double  dist_from_sun = 0; //10^6 km
 		double  orbital_period = 0; //days
 		//int orbital_velocity; // km/s
-		int scaler;
+		double scaler;
 		Planet();
 		Planet(	string name, double diameter, double rotation_period, double day_len, 
-						double dist_from_sun, double orbital_period, int scaler );
+						double dist_from_sun, double orbital_period, double scaler );
 		// ~Planet();
 
 };
