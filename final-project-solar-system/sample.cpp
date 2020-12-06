@@ -19,7 +19,7 @@
 
 const int SCROLL_WHEEL_UP   = { 3 };
 const int SCROLL_WHEEL_DOWN = { 4 };
-
+const double RADIUS_SCALER = 500;
 // equivalent mouse movement when we click a the scroll wheel:
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
@@ -623,13 +623,14 @@ Display( )
 	drawCircle(saturn.dist_from_sun, 	1,1,1);
 	drawCircle(neptune.dist_from_sun, 1,1,1);
 
+	
 	/* A Planet */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_mercury );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
 		glTranslatef(mercury.dist_from_sun,0,0);
-		MjbSphere(1,100,100);
+		MjbSphere((mercury.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 	/*******/
@@ -640,7 +641,7 @@ Display( )
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
 		glTranslatef(venus.dist_from_sun,0,0);
-		MjbSphere(1,100,100);
+		MjbSphere((venus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 	/*******/
@@ -651,7 +652,7 @@ Display( )
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
 		glTranslatef(mars.dist_from_sun,0,0);
-		MjbSphere(1,100,100);
+		MjbSphere((mars.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 	/*******/
