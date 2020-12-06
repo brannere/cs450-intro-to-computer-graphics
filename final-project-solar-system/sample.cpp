@@ -35,6 +35,34 @@ GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
 bool texture;
 
 
+float*
+Array3( float a, float b, float c )
+{
+	static float array[4];
+	array[0] = a;
+	array[1] = b;
+	array[2] = c;
+	array[3] = 1.;
+	return array;
+}
+
+
+void
+SetSpotLight( int ilight, float x, float y, float z, float xdir, float ydir, float zdir, float r, float g, float b )
+{
+	glLightfv( ilight, GL_POSITION, Array3( x, y, z ) );
+	glLightfv( ilight, GL_SPOT_DIRECTION, Array3(xdir,ydir,zdir) );
+	glLightf( ilight, GL_SPOT_EXPONENT, 1. );
+	glLightf( ilight, GL_SPOT_CUTOFF, 45. );
+	glLightfv( ilight, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( ilight, GL_DIFFUSE, Array3( r, g, b ) );
+	glLightfv( ilight, GL_SPECULAR, Array3( r, g, b ) );
+	// glLightf ( ilight, GL_CONSTANT_ATTENUATION, 1. );
+	// glLightf ( ilight, GL_LINEAR_ATTENUATION, 0. );
+	// glLightf ( ilight, GL_QUADRATIC_ATTENUATION, 0. );
+	glEnable( ilight );
+}
+
 Planet mercury("mercury",	4879,		1407.6,		4222.6,	57.9,		88		,0.01);
 Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	224.7	,0.01);
 Planet earth	("earth",		12756,	23.9,			24,			149.6,	365.2	,0.01);
@@ -612,13 +640,21 @@ Display( )
 
 	// draw the current object:
 
-	glCallList( BoxList );
+	// glCallList( BoxList );
 	// glEnable(GL_TEXTURE_2D);
 	// glBindTexture( GL_TEXTURE_2D, tex_mars );
 	// glColor3f( 0., 1., 0. );
 	
 	// MjbSphere(1,100,100);
 	// glDisable( GL_TEXTURE_2D );
+
+
+	/* Put a point light at 0,0,0*/
+
+
+	
+
+
 
 	drawCircle(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
 	drawCircle(venus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
@@ -629,7 +665,18 @@ Display( )
 	drawCircle(uranus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
 	drawCircle(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
 
+	glEnable( GL_LIGHTING );
+	glLightfv( GL_LIGHT2, GL_POSITION, Array3(0,0,0));
+	glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
+	// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
+	// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
+	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
+	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 0 ) );
+	glLightfv( GL_LIGHT2, GL_SPECULAR, Array3( 1, 1, 1 ) );
 
+	glEnable(GL_LIGHT2);
+
+	glShadeModel( GL_FLAT );
 	/* A Sun */
 	// glEnable(GL_TEXTURE_2D);
 	// glBindTexture( GL_TEXTURE_2D, tex_mercury );
@@ -719,7 +766,7 @@ Display( )
 	glDisable( GL_TEXTURE_2D );
 	/*******/
 
-	
+	glDisable(GL_LIGHTING);
 	
 	glEnd( );
 	
