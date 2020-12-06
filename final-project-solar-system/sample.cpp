@@ -20,14 +20,15 @@
 const int SCROLL_WHEEL_UP   = { 3 };
 const int SCROLL_WHEEL_DOWN = { 4 };
 const double RADIUS_SCALER = 500;
-const int SUN_DIAM = 160000;
+const int SUN_DIAM = 190000;
 const int SUN_DIAM_DENOM = 15000;
+const double ORBIT_SCALER = 0.0001;
 float POS = 0;
 // equivalent mouse movement when we click a the scroll wheel:
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
 
-const int MS_PER_CYCLE = 1000000; 
+const int MS_PER_CYCLE = 60000; 
 float Time;
 GLuint Tex0, Tex1;
 GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
@@ -733,7 +734,7 @@ Display( )
 		glTranslatef(
 			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*cos(POS),0,
 			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*sin(POS)
-			);
+		);
 		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -744,7 +745,13 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_saturn );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(saturn.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(saturn.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(saturn.orbital_period)*ORBIT_SCALER),0,
+			
+			(saturn.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(saturn.orbital_period)*ORBIT_SCALER)
+		);
 		MjbSphere((saturn.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
