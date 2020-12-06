@@ -22,11 +22,12 @@ const int SCROLL_WHEEL_DOWN = { 4 };
 const double RADIUS_SCALER = 500;
 const int SUN_DIAM = 160000;
 const int SUN_DIAM_DENOM = 15000;
+float POS = 0;
 // equivalent mouse movement when we click a the scroll wheel:
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
 
-const int MS_PER_CYCLE = 1000; 
+const int MS_PER_CYCLE = 1000000; 
 float Time;
 GLuint Tex0, Tex1;
 GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
@@ -521,7 +522,9 @@ Animate( )
 	int ms = glutGet( GLUT_ELAPSED_TIME );
 	ms %= MS_PER_CYCLE;
 	Time = (float)ms / (float)MS_PER_CYCLE;
-	// fprintf(stdout, "Animate\n");		
+	POS = 90*Time;
+	// fprintf(stdout, "Animate\n");
+	// fprintf(stdout, "Time: %f\n", Time);		
 
 	glutSetWindow( MainWindow );
 	glutPostRedisplay( );
@@ -727,7 +730,10 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_jupiter );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*POS,0,
+			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*POS
+			);
 		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
