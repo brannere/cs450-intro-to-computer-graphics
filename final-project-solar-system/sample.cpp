@@ -22,13 +22,13 @@ const int SCROLL_WHEEL_DOWN = { 4 };
 const double RADIUS_SCALER = 500;
 const int SUN_DIAM = 190000;
 const int SUN_DIAM_DENOM = 15000;
-const double ORBIT_SCALER = 0.0001;
+const double ORBIT_SCALER = 0.01;
 float POS = 0;
 // equivalent mouse movement when we click a the scroll wheel:
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
 
-const int MS_PER_CYCLE = 60000; 
+const int MS_PER_CYCLE = 70000; 
 float Time;
 GLuint Tex0, Tex1;
 GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
@@ -65,14 +65,23 @@ SetSpotLight( int ilight, float x, float y, float z, float xdir, float ydir, flo
 	glEnable( ilight );
 }
 
-Planet mercury("mercury",	4879,		1407.6,		4222.6,	57.9,		88		,0.01);
-Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	224.7	,0.01);
-Planet earth	("earth",		12756,	23.9,			24,			149.6,	365.2	,0.01);
-Planet mars		("mars",		6792,		24.6,			24.7,		227.9,	687		,0.01);
-Planet jupiter("jupiter",	142984,	9.9,			9.9,		778.6,	4331	,0.01);
-Planet saturn	("saturn",	120536,	10.7,			10.7,		1433.5,	10747	,0.01);
-Planet uranus	("uranus",	51118,	-17.2,		17.2,		2872.5,	30589	,0.01);
-Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	59800	,0.01);
+// Planet mercury("mercury",	4879,		1407.6,		4222.6,	57.9,		88		,0.01);
+// Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	224.7	,0.01);
+// Planet earth	("earth",		12756,	23.9,			24,			149.6,	365.2	,0.01);
+// Planet mars		("mars",		6792,		24.6,			24.7,		227.9,	687		,0.01);
+// Planet jupiter("jupiter",	142984,	9.9,			9.9,		778.6,	4331	,0.01);
+// Planet saturn	("saturn",	120536,	10.7,			10.7,		1433.5,	10747	,0.01);
+// Planet uranus	("uranus",	51118,	-17.2,		17.2,		2872.5,	30589	,0.01);
+// Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	59800	,0.01);
+
+Planet mercury("mercury",	4879,		1407.6,		4222.6,	57.9,		59800	,0.01);
+Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	30589	,0.01);
+Planet earth	("earth",		12756,	23.9,			24,			149.6,	10747	,0.01);
+Planet mars		("mars",		6792,		24.6,			24.7,		227.9,	4331	,0.01);
+Planet jupiter("jupiter",	142984,	9.9,			9.9,		778.6,	687		,0.01);
+Planet saturn	("saturn",	120536,	10.7,			10.7,		1433.5,	365.2	,0.01);
+Planet uranus	("uranus",	51118,	-17.2,		17.2,		2872.5,	224.7	,0.01);
+Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	88		,0.01);
 
 /* This isn't the the real diameter of the sun... */
 Planet sun		("sun",			SUN_DIAM,	0,			0, 			0, 			0			,0.01);
@@ -105,7 +114,7 @@ Planet sun		("sun",			SUN_DIAM,	0,			0, 			0, 			0			,0.01);
 
 // title of these windows:
 
-const char *WINDOWTITLE = { "OpenGL / GLUT Sample -- Joe Graphics" };
+const char *WINDOWTITLE = { "OpenGL / Final Project; Solar System -- Erick Branner" };
 const char *GLUITITLE   = { "User Interface Window" };
 
 
@@ -698,7 +707,13 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_mercury );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(mercury.orbital_period)*ORBIT_SCALER),0,
+			
+			(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(mercury.orbital_period)*ORBIT_SCALER)
+		);
 		MjbSphere((mercury.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -709,7 +724,13 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_venus );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(venus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(venus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(venus.orbital_period)*ORBIT_SCALER),0,
+			
+			(venus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(venus.orbital_period)*ORBIT_SCALER)
+		);
 		MjbSphere((venus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -720,7 +741,13 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_mars );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(mars.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(mars.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(mars.orbital_period)*ORBIT_SCALER),0,
+			
+			(mars.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(mars.orbital_period)*ORBIT_SCALER)
+		);
 		MjbSphere((mars.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -765,7 +792,13 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_uranus );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(uranus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(uranus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(uranus.orbital_period)*ORBIT_SCALER),0,
+			
+			(uranus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(uranus.orbital_period)*ORBIT_SCALER)
+		);
 		MjbSphere((uranus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -776,7 +809,22 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_neptune );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
-		glTranslatef(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM),0,0);
+		glTranslatef(
+			(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(neptune.orbital_period)*ORBIT_SCALER),0,
+			
+			(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(neptune.orbital_period)*ORBIT_SCALER)
+		);
+		// glTranslatef(
+		// 	(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+		// 	cos(POS*(neptune.orbital_period)*ORBIT_SCALER),0,
+			
+		// 	(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+		// 	sin(POS*(neptune.orbital_period)*ORBIT_SCALER)
+		// );
+		// glTranslatef(((POS % neptune.orbital_period)/neptune.orbital_period)*360,0
+		// ,((POS % neptune.orbital_period)/neptune.orbital_period)*360);
 		MjbSphere((neptune.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
