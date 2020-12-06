@@ -732,8 +732,11 @@ Display( )
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
 		glTranslatef(
-			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*cos(POS),0,
-			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*sin(POS)
+			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(jupiter.orbital_period)*ORBIT_SCALER),0,
+			
+			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(jupiter.orbital_period)*ORBIT_SCALER)
 		);
 		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
