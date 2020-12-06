@@ -621,10 +621,11 @@ Display( )
 	drawCircle(mars.dist_from_sun, 		1,1,1);
 	drawCircle(jupiter.dist_from_sun, 1,1,1);
 	drawCircle(saturn.dist_from_sun, 	1,1,1);
+	drawCircle(uranus.dist_from_sun, 	1,1,1);
 	drawCircle(neptune.dist_from_sun, 1,1,1);
 
 	
-	/* A Planet */
+	/* A Mercury */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_mercury );
 	glPushMatrix();
@@ -635,7 +636,7 @@ Display( )
 	glDisable( GL_TEXTURE_2D );
 	/*******/
 	
-	/* A Planet */
+	/* A Venus */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_venus );
 	glPushMatrix();
@@ -646,7 +647,7 @@ Display( )
 	glDisable( GL_TEXTURE_2D );
 	/*******/
 
-	/* A Planet */
+	/* A Mars */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_mars );
 	glPushMatrix();
@@ -657,7 +658,50 @@ Display( )
 	glDisable( GL_TEXTURE_2D );
 	/*******/
 
-	
+	/* A Jupiter */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_jupiter );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(jupiter.dist_from_sun,0,0);
+		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
+	/* A Satrun */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_saturn );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(saturn.dist_from_sun,0,0);
+		MjbSphere((saturn.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
+	/* A Uranus */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_uranus );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(uranus.dist_from_sun,0,0);
+		MjbSphere((uranus.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
+	/* A Neptune */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_neptune );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(neptune.dist_from_sun,0,0);
+		MjbSphere((neptune.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
 	
 	
 	glEnd( );
