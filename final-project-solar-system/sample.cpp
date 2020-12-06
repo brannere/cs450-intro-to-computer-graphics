@@ -830,6 +830,24 @@ Display( )
 	glDisable( GL_TEXTURE_2D );
 	/*******/
 
+		/* A Uranus */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_earth );
+	glPushMatrix();
+		glColor3f( 1., 0., 0. );
+		glTranslatef(
+			(earth.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			cos(POS*(earth.orbital_period)*ORBIT_SCALER),0,
+			
+			(earth.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+			sin(POS*(earth.orbital_period)*ORBIT_SCALER)
+		);
+		MjbSphere((earth.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
+
 	glDisable(GL_LIGHTING);
 	
 	glEnd( );
@@ -1178,6 +1196,7 @@ InitGraphics( )
 	unsigned char * TextureArray4 = BmpToTexture("bmps/saturn.bmp", &width, &height );
 	unsigned char * TextureArray5 = BmpToTexture("bmps/uranus.bmp", &width, &height );
 	unsigned char * TextureArray6 = BmpToTexture("bmps/neptune.bmp", &width, &height );
+	unsigned char * TextureArray7 = BmpToTexture("bmps/earth.bmp", &width, &height );
 	glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 	
 	
@@ -1258,7 +1277,17 @@ InitGraphics( )
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray6);
 	/******/
+	/******/
+	glGenTextures( 1, &tex_earth );
+	glBindTexture( GL_TEXTURE_2D, tex_earth);
 
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray7);
+	/******/
 	// glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray1);
 
 }
