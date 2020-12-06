@@ -1,5 +1,5 @@
-sample:	sample.cpp
-	g++ -o run sample.cpp  -lglut -lGL  -lGLU
+sample:	sample.cpp planet.cpp planet.h
+	g++ -o run planet.cpp sample.cpp -lglut -lGL  -lGLU
 
 
 planets: planet.cpp testing_driver.cpp planet.h

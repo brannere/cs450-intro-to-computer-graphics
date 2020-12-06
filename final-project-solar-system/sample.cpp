@@ -15,9 +15,14 @@
 #include <GL/glu.h>
 #include "glut.h"
 #include "bmptotexture.cpp"
+#include "planet.h"
+
 const int MS_PER_CYCLE = 1000; 
 float Time;
 GLuint Tex0, Tex1;
+GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
+				tex_saturn, tex_uranus, tex_neptune;
+
 bool texture;
 
 
@@ -919,11 +924,15 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 	int width, height;
-	unsigned char * TextureArray0 = BmpToTexture("worldtex.bmp", &width, &height );
+	unsigned char * TextureArray0 = BmpToTexture("bmps/mars.bmp", &width, &height );
 	glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+	
+	
 	glGenTextures( 1, &Tex0 );
 	glGenTextures( 1, &Tex1 );
 	glBindTexture( GL_TEXTURE_2D, Tex0 );
+
+
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );

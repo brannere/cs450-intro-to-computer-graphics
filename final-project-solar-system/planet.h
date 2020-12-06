@@ -4,6 +4,7 @@
 #include <string>
 using std::string;
 /* https://nssdc.gsfc.nasa.gov/planetary/factsheet/ */
+/* textures are named planetname.bmp --> will append .bmp to get texture */
 
 class Planet{
 
