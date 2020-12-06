@@ -396,15 +396,17 @@ MjbSphere( float radius, int slices, int stacks )
 
 /* Erick's final project helper functions */
 
+// radius, r
+void drawCircle(double radius,float r, float g, float b){
+	glBegin(GL_LINE_STRIP);
+	glColor3f(r,g,b);
+	for(int i = 0; i < 90; i++){
+		glVertex3f(radius*cos(i*0.1),0, radius*sin(i*0.1));
+	}
+	glEnd();
 
-// void drawCircle(const Planet& p){
-// 	/* distance from sun will be diameter */
-// 	int radius = 7;
-// 	int l2_posx = 0; 
-// 	int l2_posy = radius*cos(ANGLE);
-// 	int l2_posz = radius*sin(ANGLE); 
-// 	return;
-// }
+	return;
+}
 
 // main program:
 #include <time.h>
@@ -597,15 +599,7 @@ Display( )
 	MjbSphere(1,100,100);
 	glDisable( GL_TEXTURE_2D );
 
-	glBegin(GL_LINE_STRIP);
-		int r = 4;
-		for(int i = 0; i < 90; i++){
-			glVertex3f(r*cos(i*0.1),0, r*sin(i*0.1));
-		}
-	glEnd();
-	for(int i = 0 ; i < 360; i++){
-
-	}
+	drawCircle(5, 1,1,0);
 
 	/* A Planet */
 	glEnable(GL_TEXTURE_2D);
