@@ -17,6 +17,13 @@
 #include "bmptotexture.cpp"
 #include "planet.h"
 
+const int SCROLL_WHEEL_UP   = { 3 };
+const int SCROLL_WHEEL_DOWN = { 4 };
+
+// equivalent mouse movement when we click a the scroll wheel:
+
+const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
+
 const int MS_PER_CYCLE = 1000; 
 float Time;
 GLuint Tex0, Tex1;
@@ -24,6 +31,16 @@ GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
 				tex_saturn, tex_uranus, tex_neptune;
 
 bool texture;
+
+
+Planet mercury("mercury",	4879,		1407.6,		4222.6,	57.9,		88		,1);
+Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	224.7	,1);
+Planet earth	("earth",		12756,	23.9,			24,			149.6,	365.2	,1);
+Planet mars		("mars",		6792,		24.6,			24.7,		227.9,	687		,1);
+Planet jupiter("jupiter",	142984,	9.9,			9.9,		778.6,	4331	,1);
+Planet saturn	("saturn",	120536,	10.7,			10.7,		1433.5,	10747	,1);
+Planet uranus	("uranus",	51118,	-17.2,		17.2,		2872.5,	30589	,1);
+Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	59800	,1);
 
 
 //	This is a sample OpenGL / GLUT program
@@ -404,7 +421,6 @@ void drawCircle(double radius,float r, float g, float b){
 		glVertex3f(radius*cos(i*0.1),0, radius*sin(i*0.1));
 	}
 	glEnd();
-
 	return;
 }
 
@@ -599,7 +615,13 @@ Display( )
 	MjbSphere(1,100,100);
 	glDisable( GL_TEXTURE_2D );
 
-	drawCircle(5, 1,1,0);
+	drawCircle(mercury.dist_from_sun, 1,1,1);
+	drawCircle(venus.dist_from_sun, 	1,1,1);
+	drawCircle(earth.dist_from_sun, 	1,1,1);
+	drawCircle(mars.dist_from_sun, 		1,1,1);
+	drawCircle(jupiter.dist_from_sun, 1,1,1);
+	drawCircle(saturn.dist_from_sun, 	1,1,1);
+	drawCircle(neptune.dist_from_sun, 1,1,1);
 
 	/* A Planet */
 	glEnable(GL_TEXTURE_2D);
@@ -1194,6 +1216,20 @@ MouseButton( int button, int state, int x, int y )
 
 		case GLUT_RIGHT_BUTTON:
 			b = RIGHT;		break;
+
+		case SCROLL_WHEEL_UP:
+			Scale += SCLFACT * SCROLL_WHEEL_CLICK_FACTOR;
+			// keep object from turning inside-out or disappearing:
+			if (Scale < MINSCALE)
+				Scale = MINSCALE;
+			break;
+
+		case SCROLL_WHEEL_DOWN:
+			Scale -= SCLFACT * SCROLL_WHEEL_CLICK_FACTOR;
+			// keep object from turning inside-out or disappearing:
+			if (Scale < MINSCALE)
+				Scale = MINSCALE;
+			break;
 
 		default:
 			b = 0;
