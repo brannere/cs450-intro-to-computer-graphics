@@ -42,7 +42,7 @@ bool texture;
 //		6. The transformations to be reset
 //		7. The program to quit
 //
-//	Author:			Joe Graphics
+//	Author:			Erick Branner
 
 // NOTE: There are a lot of good reasons to use const variables instead
 // of #define's.  However, Visual C++ does not allow a const variable
@@ -394,6 +394,18 @@ MjbSphere( float radius, int slices, int stacks )
 }
 
 
+/* Erick's final project helper functions */
+
+
+// void drawCircle(const Planet& p){
+// 	/* distance from sun will be diameter */
+// 	int radius = 7;
+// 	int l2_posx = 0; 
+// 	int l2_posy = radius*cos(ANGLE);
+// 	int l2_posz = radius*sin(ANGLE); 
+// 	return;
+// }
+
 // main program:
 #include <time.h>
 int
@@ -584,6 +596,16 @@ Display( )
 	
 	MjbSphere(1,100,100);
 	glDisable( GL_TEXTURE_2D );
+
+	glBegin(GL_LINE_STRIP);
+		int r = 4;
+		for(int i = 0; i < 90; i++){
+			glVertex3f(r*cos(i*0.1),0, r*sin(i*0.1));
+		}
+	glEnd();
+	for(int i = 0 ; i < 360; i++){
+
+	}
 
 	/* A Planet */
 	glEnable(GL_TEXTURE_2D);

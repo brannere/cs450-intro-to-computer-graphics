@@ -10,14 +10,14 @@ class Planet{
 
 	private: 
 		string name = ""; 
+
+	public:
 		double  diameter = 0; //km
 		double  rotation_period = 0; //hours
 		double  day_len = 0; //hours 
 		double  dist_from_sun = 0; //10^6 km
 		double  orbital_period = 0; //days
 		//int orbital_velocity; // km/s
-
-	public:
 		int scaler;
 		Planet();
 		Planet(	string name, double diameter, double rotation_period, double day_len, 
