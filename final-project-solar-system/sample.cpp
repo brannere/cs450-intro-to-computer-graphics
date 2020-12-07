@@ -680,7 +680,7 @@ Display( )
 
 	glEnable( GL_LIGHTING );
 	glLightfv( GL_LIGHT2, GL_POSITION, Array3(0,0,0));
-	glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
+	// glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
 	// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
 	// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
 	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
@@ -756,6 +756,8 @@ Display( )
 	/* A Jupiter */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_jupiter );
+	// glTexEnvf(GL_TEXTURE_2D, GL_MODULATE, );
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
 		glTranslatef(
