@@ -38,6 +38,7 @@ bool JUPITER = false;
 bool SATURN = false;
 bool URANUS = false;
 bool NEPTUNE = false;
+bool LINES = true; 
 
 
 
@@ -693,15 +694,16 @@ Display( )
 	
 
 
-
-	drawCircle(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(venus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(earth.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(mars.dist_from_sun		+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(saturn.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(uranus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
-	drawCircle(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	if(LINES){
+		drawCircle(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(venus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(earth.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(mars.dist_from_sun		+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(saturn.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(uranus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+		drawCircle(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
+	}
 
 
 	/* A Sun */
@@ -1543,6 +1545,10 @@ Keyboard( unsigned char c, int x, int y )
 		case ESCAPE:
 			DoMainMenu( QUIT );	// will not return here
 			break;				// happy compiler
+		case 'l':
+		case 'L':
+			LINES = !LINES;
+			break;
 
 		default:
 			fprintf( stderr, "Don't know what to do with keyboard hit: '%c' (0x%0x)\n", c, c );
