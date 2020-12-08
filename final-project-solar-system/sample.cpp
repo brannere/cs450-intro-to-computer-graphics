@@ -76,7 +76,8 @@ SetSpotLight( int ilight, float x, float y, float z, float xdir, float ydir, flo
 // Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	59800	,0.01);
 
 Planet mercury("mercury",	4879,		1407.6,		4222.6,	57.9,		59800	,0.01);
-Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	30589	,0.01);
+// Planet venus	("venus",		12104,	-58325.5,	2802,		108.2,	30589	,0.01);
+Planet venus	("venus",		12104,	58325.5,	2802,		108.2,	30589	,0.01);
 Planet earth	("earth",		12756,	23.9,			24,			149.6,	10747	,0.01);
 Planet mars		("mars",		6792,		24.6,			24.7,		227.9,	4331	,0.01);
 Planet jupiter("jupiter",	142984,	9.9,			9.9,		778.6,	687		,0.01);
@@ -716,6 +717,10 @@ Display( )
 			(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(mercury.orbital_period)*ORBIT_SCALER)
 		);
+		glRotatef(
+			(G_TIME+1 % int(mercury.rotation_period+1)/int(mercury.rotation_period+1*360.f)),
+			0,1,0
+		);
 		MjbSphere((mercury.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -732,6 +737,10 @@ Display( )
 			
 			(venus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(venus.orbital_period)*ORBIT_SCALER)
+		);
+		glRotatef(
+			(G_TIME+1 % int(venus.rotation_period+1)/int(venus.rotation_period+1*360.f)),
+			0,1,0
 		);
 		MjbSphere((venus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
@@ -752,6 +761,11 @@ Display( )
 			(mars.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(mars.orbital_period)*ORBIT_SCALER)
 		);
+		glRotatef(
+			(G_TIME+1 % int(mars.rotation_period+1)/int(mars.rotation_period+1*360.f)),
+			0,1,0
+		);
+
 		MjbSphere((mars.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -773,7 +787,7 @@ Display( )
 		);
 		glRotatef(
 			(G_TIME+1 % int(jupiter.rotation_period+1)/int(jupiter.rotation_period+1*360.f)),
-			0,0,1
+			0,1,0
 		);
 		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
@@ -792,6 +806,10 @@ Display( )
 			(saturn.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(saturn.orbital_period)*ORBIT_SCALER)
 		);
+		glRotatef(
+			(G_TIME+1 % int(saturn.rotation_period+1)/int(saturn.rotation_period+1*360.f)),
+			0,1,0
+		);
 		MjbSphere((saturn.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
@@ -808,6 +826,10 @@ Display( )
 			
 			(uranus.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(uranus.orbital_period)*ORBIT_SCALER)
+		);
+		glRotatef(
+			(G_TIME+1 % int(uranus.rotation_period+2)/int(uranus.rotation_period+2*360.f)*-1),
+			0,1,0
 		);
 		MjbSphere((uranus.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
@@ -826,6 +848,11 @@ Display( )
 			(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(neptune.orbital_period)*ORBIT_SCALER)
 		);
+		glRotatef(
+			(G_TIME+1 % int(neptune.rotation_period+1)/int(neptune.rotation_period+1*360.f)),
+			0,1,0
+		);
+
 		// glTranslatef(
 		// 	(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 		// 	cos(POS*(neptune.orbital_period)*ORBIT_SCALER),0,
@@ -840,7 +867,7 @@ Display( )
 	glDisable( GL_TEXTURE_2D );
 	/*******/
 
-		/* A Uranus */
+		/* An Earth */
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture( GL_TEXTURE_2D, tex_earth );
 	glPushMatrix();
