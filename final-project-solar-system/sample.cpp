@@ -46,7 +46,7 @@ const int MS_PER_CYCLE = 70000;
 float Time;
 GLuint Tex0, Tex1;
 GLuint 	tex_mercury,tex_venus,tex_earth,tex_mars,tex_jupiter,
-				tex_saturn, tex_uranus, tex_neptune;
+				tex_saturn, tex_uranus, tex_neptune, tex_sun, tex_stars;
 
 bool texture;
 
@@ -702,6 +702,19 @@ Display( )
 	drawCircle(uranus.dist_from_sun	+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
 	drawCircle(neptune.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
 
+
+	/* A Sun */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_sun );
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+	glPushMatrix();
+		glColor3f( 1., 1., 0. );
+		glTranslatef(0,0,0);
+		MjbSphere((sun.diameter)/RADIUS_SCALER,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
+
 	glEnable( GL_LIGHTING );
 	glLightfv( GL_LIGHT2, GL_POSITION, Array3(0,0,0));
 	// glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
@@ -714,18 +727,6 @@ Display( )
 	glEnable(GL_LIGHT2);
 
 	glShadeModel( GL_SMOOTH );	
-
-	/* A Sun */
-	// glEnable(GL_TEXTURE_2D);
-	// glBindTexture( GL_TEXTURE_2D, tex_mercury );
-	glPushMatrix();
-		glColor3f( 1., 1., 0. );
-		// glTranslatef(mercury.dist_from_sun,0,0);
-		MjbSphere((sun.diameter)/RADIUS_SCALER,100,100);
-	glPopMatrix();
-	// glDisable( GL_TEXTURE_2D );
-	/*******/
-
 
 	/* A Mercury */
 	glEnable(GL_TEXTURE_2D);
@@ -1254,6 +1255,7 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 	int width, height;
+	int sw, sh;
 	unsigned char * TextureArray0 = BmpToTexture("bmps/mercury.bmp", &width, &height );
 	unsigned char * TextureArray1 = BmpToTexture("bmps/venus.bmp", &width, &height );
 	unsigned char * TextureArray2 = BmpToTexture("bmps/mars.bmp", &width, &height );
@@ -1262,6 +1264,7 @@ InitGraphics( )
 	unsigned char * TextureArray5 = BmpToTexture("bmps/uranus.bmp", &width, &height );
 	unsigned char * TextureArray6 = BmpToTexture("bmps/neptune.bmp", &width, &height );
 	unsigned char * TextureArray7 = BmpToTexture("bmps/earth.bmp", &width, &height );
+	unsigned char * TextureArray8 = BmpToTexture("bmps/sun.bmp", &sw, &sh );
 	glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 	
 	
@@ -1287,7 +1290,7 @@ InitGraphics( )
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray1);
 	/******/
-		/******/
+	/******/
 	glGenTextures( 1, &tex_mars );
 	glBindTexture( GL_TEXTURE_2D, tex_mars);
 
@@ -1341,6 +1344,17 @@ InitGraphics( )
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray6);
+	/******/
+	/******/
+	glGenTextures( 1, &tex_sun );
+	glBindTexture( GL_TEXTURE_2D, tex_sun);
+
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray8);
 	/******/
 	/******/
 	glGenTextures( 1, &tex_earth );
