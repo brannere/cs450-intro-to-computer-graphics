@@ -25,6 +25,7 @@ const int SUN_DIAM_DENOM = 15000;
 const double ORBIT_SCALER = 0.01;
 float POS = 0;
 int G_TIME = 0;
+bool Freeze = false; 
 // equivalent mouse movement when we click a the scroll wheel:
 
 bool SUN = true;
@@ -543,16 +544,19 @@ Animate( )
 	// for Display( ) to find:
 
 	// force a call to Display( ) next time it is convenient:
-	int ms = glutGet( GLUT_ELAPSED_TIME );
-	G_TIME = glutGet( GLUT_ELAPSED_TIME );
-	ms %= MS_PER_CYCLE;
-	Time = (float)ms / (float)MS_PER_CYCLE;
-	POS = 90*Time;
-	// fprintf(stdout, "Animate\n");
-	// fprintf(stdout, "Time: %f\n", Time);		
+		
+	if(!Freeze){
+		int ms = glutGet( GLUT_ELAPSED_TIME );
+		G_TIME = glutGet( GLUT_ELAPSED_TIME );
+		ms %= MS_PER_CYCLE;
+		Time = (float)ms / (float)MS_PER_CYCLE;
+		POS = 90*Time;
+		// fprintf(stdout, "Animate\n");
+		// fprintf(stdout, "Time: %f\n", Time);		
 
-	glutSetWindow( MainWindow );
-	glutPostRedisplay( );
+	}
+		glutSetWindow( MainWindow );
+		glutPostRedisplay( );
 }
 
 
@@ -1485,6 +1489,10 @@ Keyboard( unsigned char c, int x, int y )
 		case 'o':
 		case 'O':
 			WhichProjection = ORTHO;
+			break;
+		case 'f':
+		case 'F':
+			Freeze = !Freeze;
 			break;
 
 		case 'p':
