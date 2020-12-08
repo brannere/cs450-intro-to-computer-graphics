@@ -12,6 +12,9 @@ class Planet{
 		string name = ""; 
 
 	public:
+		float x = 0;
+		float y = 0; 
+		float z = 0;
 		double  diameter = 0; //km
 		double  rotation_period = 0; //hours
 		double  day_len = 0; //hours 
@@ -22,6 +25,8 @@ class Planet{
 		Planet();
 		Planet(	string name, double diameter, double rotation_period, double day_len, 
 						double dist_from_sun, double orbital_period, double scaler );
+
+		void set_cords(float x, float y, float z);
 		// ~Planet();
 
 };

@@ -27,6 +27,18 @@ float POS = 0;
 int G_TIME = 0;
 // equivalent mouse movement when we click a the scroll wheel:
 
+bool SUN = true;
+bool MERCURY = false; 
+bool VENUS = false;
+bool EARTH = false;
+bool MARS = false;
+bool JUPITER = false;
+bool SATURN = false;
+bool URANUS = false;
+bool NEPTUNE = false;
+
+
+
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
 
 const int MS_PER_CYCLE = 70000; 
@@ -607,8 +619,13 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
-
+	// gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	if(SUN){
+		gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	}
+	else if(JUPITER){
+		gluLookAt(0,0,3., jupiter.x, jupiter.y, jupiter.z, 0.,1.,0.);
+	}
 
 	// rotate the scene:
 
@@ -785,6 +802,12 @@ Display( )
 			
 			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(jupiter.orbital_period)*ORBIT_SCALER)
+		);
+		jupiter.set_cords((	jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+												cos(POS*(jupiter.orbital_period)*ORBIT_SCALER),
+												0,
+												(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
+												sin(POS*(jupiter.orbital_period)*ORBIT_SCALER)
 		);
 		glRotatef(
 			(G_TIME+1 % int(jupiter.rotation_period+1)/int(jupiter.rotation_period+1*360.f)),
@@ -1420,7 +1443,34 @@ Keyboard( unsigned char c, int x, int y )
 
 	switch( c )
 	{
-		case 't':
+		case '1':
+			SUN = !SUN;
+			break;
+		case '2':
+			MERCURY = !MERCURY;
+			break;
+		case '3':
+			VENUS = !VENUS;
+			break;
+		case '4':
+			EARTH = !EARTH;
+			break;
+		case '5':
+			MARS = !MARS;
+			break;
+		case '6':
+			JUPITER = !JUPITER;
+			break;
+		case '7':
+			SATURN = !SATURN;
+			break;
+		case '8':
+			URANUS = !URANUS; 
+			break;
+		case '9':
+			NEPTUNE = !NEPTUNE;
+			break;
+
 		case 'T':
 			if(texture){
 				texture = false;
