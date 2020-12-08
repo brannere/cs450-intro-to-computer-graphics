@@ -692,7 +692,7 @@ Display( )
 
 
 	
-
+	//x y for eye, 
 
 	if(LINES){
 		drawCircle(mercury.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM), 1,1,1);
