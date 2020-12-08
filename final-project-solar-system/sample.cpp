@@ -714,6 +714,17 @@ Display( )
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 	/*******/
+	/* The stars */
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture( GL_TEXTURE_2D, tex_stars );
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+	glPushMatrix();
+		glColor3f( 1., 1., 0. );
+		glTranslatef(0,0,0);
+		MjbSphere(70,100,100);
+	glPopMatrix();
+	glDisable( GL_TEXTURE_2D );
+	/*******/
 
 	glEnable( GL_LIGHTING );
 	glLightfv( GL_LIGHT2, GL_POSITION, Array3(0,0,0));
@@ -1265,6 +1276,7 @@ InitGraphics( )
 	unsigned char * TextureArray6 = BmpToTexture("bmps/neptune.bmp", &width, &height );
 	unsigned char * TextureArray7 = BmpToTexture("bmps/earth.bmp", &width, &height );
 	unsigned char * TextureArray8 = BmpToTexture("bmps/sun.bmp", &sw, &sh );
+	unsigned char * TextureArray9 = BmpToTexture("bmps/stars.bmp", &sw, &sh );
 	glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
 	
 	
@@ -1346,6 +1358,17 @@ InitGraphics( )
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray6);
 	/******/
 	/******/
+	glGenTextures( 1, &tex_earth );
+	glBindTexture( GL_TEXTURE_2D, tex_earth);
+
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray7);
+	/******/
+	/******/
 	glGenTextures( 1, &tex_sun );
 	glBindTexture( GL_TEXTURE_2D, tex_sun);
 
@@ -1357,15 +1380,15 @@ InitGraphics( )
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray8);
 	/******/
 	/******/
-	glGenTextures( 1, &tex_earth );
-	glBindTexture( GL_TEXTURE_2D, tex_earth);
+	glGenTextures( 1, &tex_stars );
+	glBindTexture( GL_TEXTURE_2D, tex_stars);
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray7);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray9);
 	/******/
 	// glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureArray1);
 
