@@ -20,8 +20,9 @@
 const int SCROLL_WHEEL_UP   = { 3 };
 const int SCROLL_WHEEL_DOWN = { 4 };
 const double RADIUS_SCALER = 500;
-const int SUN_DIAM = 190000;
-const int SUN_DIAM_DENOM = 15000;
+// const int SUN_DIAM = 800000;
+const int SUN_DIAM = 1392684;
+const int SUN_DIAM_DENOM = 40000;
 const double ORBIT_SCALER = 0.01;
 float POS = 0;
 int G_TIME = 0;
