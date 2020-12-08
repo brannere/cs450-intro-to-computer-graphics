@@ -692,7 +692,8 @@ Display( )
 
 	glEnable(GL_LIGHT2);
 
-	glShadeModel( GL_FLAT );
+	glShadeModel( GL_SMOOTH );	
+
 	/* A Sun */
 	// glEnable(GL_TEXTURE_2D);
 	// glBindTexture( GL_TEXTURE_2D, tex_mercury );

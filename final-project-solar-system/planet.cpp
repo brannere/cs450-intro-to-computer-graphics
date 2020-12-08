@@ -18,7 +18,7 @@ Planet::Planet(	string name, double diameter, double rotation_period,
 	this->scaler 					= scaler;
 	this->name 						= name;
 	this->diameter 				= (this->scaler)*(diameter);
-	this->rotation_period = (this->scaler)*(rotation_period);
+	this->rotation_period = (rotation_period);
 	this->day_len 				= (this->scaler)*(day_len);
 	this->dist_from_sun 	= 0.000001*((this->scaler)*(dist_from_sun)*(10*10*10*10*10*10));
 	this->orbital_period 	= (this->scaler)*(orbital_period);
