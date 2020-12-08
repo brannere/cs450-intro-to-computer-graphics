@@ -24,6 +24,7 @@ const int SUN_DIAM = 190000;
 const int SUN_DIAM_DENOM = 15000;
 const double ORBIT_SCALER = 0.01;
 float POS = 0;
+int G_TIME = 0;
 // equivalent mouse movement when we click a the scroll wheel:
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
@@ -530,6 +531,7 @@ Animate( )
 
 	// force a call to Display( ) next time it is convenient:
 	int ms = glutGet( GLUT_ELAPSED_TIME );
+	G_TIME = glutGet( GLUT_ELAPSED_TIME );
 	ms %= MS_PER_CYCLE;
 	Time = (float)ms / (float)MS_PER_CYCLE;
 	POS = 90*Time;
@@ -684,7 +686,7 @@ Display( )
 	// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
 	// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
 	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
-	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 0 ) );
+	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 1 ) );
 	glLightfv( GL_LIGHT2, GL_SPECULAR, Array3( 1, 1, 1 ) );
 
 	glEnable(GL_LIGHT2);
@@ -741,6 +743,8 @@ Display( )
 	glBindTexture( GL_TEXTURE_2D, tex_mars );
 	glPushMatrix();
 		glColor3f( 1., 0., 0. );
+		// fprintf(stdout, "G_TIME: %d\n", G_TIME);
+		// glRotatef(G_TIME);
 		glTranslatef(
 			(mars.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			cos(POS*(mars.orbital_period)*ORBIT_SCALER),0,
@@ -766,6 +770,10 @@ Display( )
 			
 			(jupiter.dist_from_sun+(SUN_DIAM/SUN_DIAM_DENOM))*
 			sin(POS*(jupiter.orbital_period)*ORBIT_SCALER)
+		);
+		glRotatef(
+			(G_TIME+1 % int(jupiter.rotation_period+1)/int(jupiter.rotation_period+1*360.f)),
+			0,0,1
 		);
 		MjbSphere((jupiter.diameter)/RADIUS_SCALER,100,100);
 	glPopMatrix();
