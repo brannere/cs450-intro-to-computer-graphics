@@ -970,7 +970,7 @@ Display( )
 	glLoadIdentity( );
 	glColor3f( 1., 1., 1. );
 	DoRasterString( 5., 20., 0., (char *)"F: Freeze" );
-	DoRasterString( 5., 15., 0., (char *)"J: Make sun smalle; K: make sun bigger" );
+	DoRasterString( 5., 15., 0., (char *)"J: Make sun smaller; K: make sun bigger" );
 	DoRasterString( 5., 10., 0., (char *)"L: Lines" );
 	DoRasterString( 5., 5., 0., (char *)"B: Lighting" );
 
