@@ -21,8 +21,8 @@ const int SCROLL_WHEEL_UP   = { 3 };
 const int SCROLL_WHEEL_DOWN = { 4 };
 const double RADIUS_SCALER = 500;
 // const int SUN_DIAM = 800000;
-const int SUN_DIAM = 1392684;
-const int SUN_DIAM_DENOM = 40000;
+int SUN_DIAM = 1392684;
+int SUN_DIAM_DENOM = 40000;
 const double ORBIT_SCALER = 0.01;
 float POS = 0;
 int G_TIME = 0;
@@ -39,7 +39,7 @@ bool SATURN = false;
 bool URANUS = false;
 bool NEPTUNE = false;
 bool LINES = true; 
-
+bool DoLighting = true;
 
 
 const float SCROLL_WHEEL_CLICK_FACTOR = { 5. };
@@ -101,7 +101,8 @@ Planet uranus	("uranus",	51118,	-17.2,		17.2,		2872.5,	224.7	,0.01);
 Planet neptune("neptune",	49528,	16.1,			16.1,		4495.1,	88		,0.01);
 
 /* This isn't the the real diameter of the sun... */
-Planet sun		("sun",			SUN_DIAM,	0,			0, 			0, 			0			,0.01);
+// moved to display function
+// Planet sun		("sun",			SUN_DIAM,	0,			0, 			0, 			0			,0.01);
 
 
 //	This is a sample OpenGL / GLUT program
@@ -690,6 +691,7 @@ Display( )
 
 	/* Put a point light at 0,0,0*/
 
+	Planet sun		("sun",			SUN_DIAM,	0,			0, 			0, 			0			,0.01);
 
 	
 	//x y for eye, 
@@ -728,19 +730,20 @@ Display( )
 	glPopMatrix();
 	glDisable( GL_TEXTURE_2D );
 	/*******/
+	if(DoLighting){
+		glEnable( GL_LIGHTING );
+		glLightfv( GL_LIGHT2, GL_POSITION, Array3(0,0,0));
+		// glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
+		// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
+		// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
+		glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
+		glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 1 ) );
+		glLightfv( GL_LIGHT2, GL_SPECULAR, Array3( 1, 1, 1 ) );
 
-	glEnable( GL_LIGHTING );
-	glLightfv( GL_LIGHT2, GL_POSITION, Array3(0,0,0));
-	// glLightfv( GL_LIGHT2, GL_SPOT_DIRECTION, Array3(0,0,0));
-	// glLightf( GL_LIGHT2, GL_SPOT_EXPONENT, 1. );
-	// glLightf( GL_LIGHT2, GL_SPOT_CUTOFF, 45. );
-	glLightfv( GL_LIGHT2, GL_AMBIENT, Array3( 0., 0., 0. ) );
-	glLightfv( GL_LIGHT2, GL_DIFFUSE, Array3( 1, 1, 1 ) );
-	glLightfv( GL_LIGHT2, GL_SPECULAR, Array3( 1, 1, 1 ) );
+		glEnable(GL_LIGHT2);
 
-	glEnable(GL_LIGHT2);
-
-	glShadeModel( GL_SMOOTH );	
+		glShadeModel( GL_SMOOTH );	
+	}
 
 	/* A Mercury */
 	glEnable(GL_TEXTURE_2D);
@@ -965,8 +968,11 @@ Display( )
 	gluOrtho2D( 0., 100.,     0., 100. );
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity( );
-	// glColor3f( 1., 1., 1. );
-	// DoRasterString( 5., 5., 0., (char *)"Text That Doesn't" );
+	glColor3f( 1., 1., 1. );
+	DoRasterString( 5., 20., 0., (char *)"F: Freeze" );
+	DoRasterString( 5., 15., 0., (char *)"J: Make sun smalle; K: make sun bigger" );
+	DoRasterString( 5., 10., 0., (char *)"L: Lines" );
+	DoRasterString( 5., 5., 0., (char *)"B: Lighting" );
 
 	// glEnable(GL_TEXTURE_2D);
 	// glBindTexture( GL_TEXTURE_2D, Tex0 );
@@ -1549,6 +1555,20 @@ Keyboard( unsigned char c, int x, int y )
 		case 'L':
 			LINES = !LINES;
 			break;
+
+		case 'j':
+		case 'J':
+			SUN_DIAM-= 10000;
+			break;
+		case 'k':
+		case 'K':
+			SUN_DIAM+= 10000;
+			break;
+
+		case 'b':
+		case 'B':
+			DoLighting = !DoLighting; 
+			break; 
 
 		default:
 			fprintf( stderr, "Don't know what to do with keyboard hit: '%c' (0x%0x)\n", c, c );
